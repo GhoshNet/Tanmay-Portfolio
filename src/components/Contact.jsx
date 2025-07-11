@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 
@@ -17,6 +17,14 @@ const Contact = () => {
 
   const [loading, setLoading] = useState(false);
 
+  // Initialize EmailJS
+  useEffect(() => {
+    const publicKey = import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY;
+    if (publicKey) {
+      emailjs.init(publicKey);
+    }
+  }, []);
+
   const handleChange = (e) => {
     const { target } = e;
     const { name, value } = target;
@@ -31,21 +39,38 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
 
-    emailjs
-      .send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          to_name: "Tanmay G",
-          from_email: form.email, 
-          to_email: "tanmay.actin@gmail.com",
-          message: form.message,
-        },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-      )
-      .then(
+    const serviceId = import.meta.env.VITE_APP_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      setLoading(false);
+      alert("Email service is not configured. Please contact me directly at tanmay.actin@gmail.com or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      setLoading(false);
+      alert("Request timed out. Please try again or contact me directly at tanmay.actin@gmail.com or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+    }, 10000); // 10 seconds timeout
+
+    try {
+      emailjs
+        .send(
+          serviceId,
+          templateId,
+          {
+            from_name: form.name,
+            to_name: "Tanmay G",
+            from_email: form.email, 
+            to_email: "tanmay.actin@gmail.com",
+            message: form.message,
+          },
+          publicKey
+        )
+        .then(
         () => {
+          clearTimeout(timeoutId);
           setLoading(false);
           alert("Thank you. I will get back to you as soon as possible. Alternatively, you can reach me at through my LinkedIn profile: https://www.linkedin.com/in/tanmay-g");
           setForm({
@@ -55,12 +80,27 @@ const Contact = () => {
           });
         },
         (error) => {
+          clearTimeout(timeoutId);
           setLoading(false);
           console.error(error);
 
-          alert("Ahh, something went wrong. Please try again.");
+          if (error.text === "The public key is required") {
+            alert("Email service is not configured. Please contact me directly at tanmay.actin@gmail.com or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+          } else if (error.text === "The template is not found") {
+            alert("Email template not found. Please contact me directly at tanmay.actin@gmail.com or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+          } else if (error.text === "The service is not found") {
+            alert("Email service not found. Please contact me directly at tanmay.actin@gmail.com or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+          } else {
+            alert("Something went wrong with the email service. Please contact me directly at tanmay.actin@gmail.com or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+          }
         }
       );
+    } catch (error) {
+      clearTimeout(timeoutId);
+      setLoading(false);
+      console.error("Unexpected error:", error);
+      alert("An unexpected error occurred. Please contact me directly at tanmay.actin@gmail.com or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+    }
   };
 
   return (
