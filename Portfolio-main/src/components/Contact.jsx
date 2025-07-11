@@ -37,9 +37,9 @@ const Contact = () => {
         import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
         {
           from_name: form.name,
-          to_name: "Tanmay Ghosh",
-          from_email: form.email,
-          to_email: "@gmail.com",
+          to_name: "Tanmay G",
+          from_email: form.email, 
+          to_email: "tanmay.actin@gmail.com",
           message: form.message,
         },
         import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
@@ -47,8 +47,7 @@ const Contact = () => {
       .then(
         () => {
           setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible.");
-
+          alert("Thank you. I will get back to you as soon as possible. Alternatively, you can reach me at through my LinkedIn profile: https://www.linkedin.com/in/tanmay-g");
           setForm({
             name: "",
             email: "",
