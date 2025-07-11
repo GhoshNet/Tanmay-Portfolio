@@ -26,7 +26,7 @@ import reactjs from "./tech/reactjs.png";
 import redux from "./tech/redux.png";
 import tailwind from "./tech/tailwind.png";
 import threejs from "./tech/threejs.svg";
-import python from "./tech/python.png";
+import python from "./tech/Python.png";
 import openCV from "./tech/OpenCV.svg"
 import YOLO from "./tech/Ultralytics_YOLO_Logomark_Original.svg";
 import fastapi from "./tech/fastapi.svg";
