@@ -16,7 +16,12 @@ import {
   express,
   aws,
   mui,
-  
+  SafeAct,
+  MovieRecommendation,
+  InvoiceProcessing,
+  ParentalAdvisory,
+  criminal,
+  langchain,
   gsap,
   framer,
   figma,
@@ -70,7 +75,7 @@ const services = [
   },
   {
     title: "AI Engineer",
-    icon: web,
+    icon: creator,
   },
   // {
   //   title: "Frontend Developer",
@@ -157,10 +162,10 @@ const technologies = [
     name: "Node JS",
     icon: nodejs,
   },
-  {
-    name: "Express Js",
-    icon: express,
-  },
+  // {
+  //   name: "Express Js",
+  //   icon: express,
+  // },
   {
     name: "AWS",
     icon: aws,
@@ -243,7 +248,7 @@ const projects = [
   {
     name: "SafeAct",
     description:
-      "Safe Act Description",
+      "A real-time computer vision system for workplace safety compliance monitoring using YOLO models, reducing manual supervision and hazards by 60%.",
     tags: [
       {
         name: "Python",
@@ -271,55 +276,131 @@ const projects = [
       },
  
     ],
-    image: project2,
-    source_code_link: "https://github.com/",
+    image: SafeAct,
+    source_code_link: "https://github.com/GhoshNet/",
   },
   {
-    name: "GearXpert",
+    name: "Movie Recommendation System",
     description:
-      "GearXpert is your ultimate destination for premium auto parts and accessories, Whether you're an automobile enthusiast or a professional, find everything you need to upgrade, repair.",
+      "A movie recommendation system that uses machine learning to recommend movies to users based on their viewing history and preferences.",
     tags: [
       {
-        name: "react",
+        name: "Python",
         color: "blue-text-gradient",
       },
-      {
-        name: "emailJs",
-        color: "green-text-gradient",
-      },
-      {
-        name: "Gsap",
-        color: "pink-text-gradient",
-      },
+      // {
+      //   name: "emailJs",
+      //   color: "green-text-gradient",
+      // },
+      // {
+      //   name: "Gsap",
+      //   color: "pink-text-gradient",
+      // },
     ],
-    image: gearXpert,
-    source_code_link: "https://github.com/",
+      image: MovieRecommendation,
+    source_code_link: "https://github.com/GhoshNet/",
   },
   {
-    name: "GoGroove-Ecommerce",
+    name: "Explicit Content Detection",
     description:
-      "Go-Groove is your ultimate destination for premium products across various categories. Whether you're a savvy shopper or a professional, enhance, and simplify your lifestyle—all in one place!",
+      "An explicit content detection system that uses machine learning to detect explicit content in images and block or report them before the user uploads or sees them.",
     tags: [
       {
-        name: "react",
+        name: "Python",
         color: "blue-text-gradient",
       },
       {
-        name: "express",
+        name: "Streamlit",
         color: "white-text-gradient",
       },
+      // {
+      //   name: "node",
+      //   color: "green-text-gradient",
+      // },
+      // {
+      //   name: "mongodb",
+      //   color: "green-text-gradient",
+      // },
+    ],
+    image: ParentalAdvisory,
+    source_code_link: "https://github.com/GhoshNet/",
+  },
+  {
+    name: "Criminal Database Management System",
+    description:
+      "A criminal database management system that allows the user to add, delete, update and search for criminals in the database.",
+    tags: [
       {
-        name: "node",
-        color: "green-text-gradient",
+        name: "Python",
+        color: "blue-text-gradient",
       },
+      // {
+      //   name: "Streamlit",
+      //   color: "white-text-gradient",
+      // },
+      // {
+      //   name: "node",
+      //   color: "green-text-gradient",
+      // },
       {
         name: "mongodb",
         color: "green-text-gradient",
       },
     ],
-    image: project3,
-    source_code_link: "https://github.com/",
+    image: criminal,
+    source_code_link: "https://github.com/GhoshNet/",
   },
+  {
+    name: "Document-based Chatbot",
+    description:
+      "A document-based question-answering platform that allows the user to ask questions about anything and get the answers from the documents already present in the database.",
+    tags: [
+      {
+        name: "Python",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "react",
+        color: "white-text-gradient",
+      },
+      {
+        name: "FastAPI",
+        color: "green-text-gradient",
+      },
+      {
+        name: "ChromaDB",
+        color: "green-text-gradient",
+      },
+    ],
+      image: langchain,
+    source_code_link: "https://github.com/GhoshNet/",
+  },
+  {
+    name: "Automated Invoice Processing System",
+    description:
+      "An automated invoice processing system that allows the user to upload an invoice and get the details of the invoice in a structured format.",
+    tags: [
+      {
+        name: "Python",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "YOLO",
+        color: "white-text-gradient",
+      },
+      {
+        name: "Tesseract",
+        color: "green-text-gradient",
+      },
+      // {
+      //   name: "ChromaDB",
+      //   color: "green-text-gradient",
+      // },
+    ],
+    image: InvoiceProcessing,
+    source_code_link: "https://github.com/GhoshNet/",
+  },
+  
 ];
 
 export { services, technologies, experiences, testimonials, projects };

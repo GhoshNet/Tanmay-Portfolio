@@ -34,9 +34,22 @@ import grpc from "./tech/grpc.png";
 import firstTestimonial from './Tars Ken.webp';
 import secondTestimonial from './image.webp';
 import thirdTestimonial from './third testimonial.webp'
+import SafeAct from './safeAct_webpage.jpg'
+import MovieRecommendation from './movie_Recommendation_system.jpg'
+import InvoiceProcessing from './invoice_processing.png'
+import ParentalAdvisory from './parental_advisory.png'
+import criminal from './criminal.png'
+import langchain from './langchain.jpg'
+
 
 
 export {
+  SafeAct,
+  MovieRecommendation,
+  InvoiceProcessing,
+  ParentalAdvisory,
+  criminal,
+  langchain,
   logo,
   backend,
   creator,
