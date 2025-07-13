@@ -34,12 +34,12 @@ import grpc from "./tech/grpc.png";
 import firstTestimonial from './Tars Ken.webp';
 import secondTestimonial from './image.webp';
 import thirdTestimonial from './third testimonial.webp'
-import SafeAct from './safeact_webpage.jpg'
-import MovieRecommendation from './movie_Recommendation_system.jpg'
+import SafeAct from './safeact_webpage.png'
+import MovieRecommendation from './movie_recommendation_system.png'
 import InvoiceProcessing from './invoice_processing.png'
 import ParentalAdvisory from './parental_advisory.png'
 import criminal from './criminal.png'
-import langchain from './langchain.jpg'
+import langchain from './langchain.png'
 
 
 
