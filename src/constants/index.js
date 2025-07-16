@@ -20,6 +20,7 @@ import {
   MovieRecommendation,
   InvoiceProcessing,
   ParentalAdvisory,
+  ActinAiHub,
   criminal,
   langchain,
   gsap,
@@ -372,7 +373,7 @@ const projects = [
         color: "green-text-gradient",
       },
     ],
-      image: langchain,
+      image: ActinAiHub,
     source_code_link: "https://github.com/GhoshNet/",
   },
   {

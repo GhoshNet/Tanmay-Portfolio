@@ -40,6 +40,7 @@ import InvoiceProcessing from './invoice_processing.png'
 import ParentalAdvisory from './parental_advisory.png'
 import criminal from './criminal.png'
 import langchain from './langchain.png'
+import ActinAiHub from './Actin_ai_hub.png'
 
 
 
@@ -47,6 +48,7 @@ export {
   SafeAct,
   MovieRecommendation,
   InvoiceProcessing,
+  ActinAiHub,
   ParentalAdvisory,
   criminal,
   langchain,
