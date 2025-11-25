@@ -57,7 +57,7 @@ export const navLinks = [
   {
     id: "about",
     title: "About",
-    
+
   },
   {
     id: "work",
@@ -71,25 +71,21 @@ export const navLinks = [
 
 const services = [
   {
+    title: "AI/ML Engineer",
+    icon: creator,
+  },
+  {
+    title: "Computer Vision Specialist",
+    icon: mobile,
+  },
+  {
     title: "Full-Stack Developer",
     icon: web,
   },
   {
-    title: "AI Engineer",
-    icon: creator,
+    title: "Backend Developer",
+    icon: backend,
   },
-  // {
-  //   title: "Frontend Developer",
-  //   icon: mobile,
-  // },
-  // {
-  //   title: "Backend Developer",
-  //   icon: backend,
-  // },
-  // {
-  //   title: "Ui UX Designer",
-  //   icon: creator,
-  // },
 ];
 
 const technologies = [
@@ -138,7 +134,7 @@ const technologies = [
   //   icon: framer,
   // },
 
- 
+
   // {
   //   name: "Three JS",
   //   icon: threejs,
@@ -184,7 +180,7 @@ const technologies = [
     name: "git",
     icon: git,
   },
- 
+
 
 ];
 
@@ -247,9 +243,9 @@ const testimonials = [
 
 const projects = [
   {
-    name: "SafeAct",
+    name: "SafeAct - AI Safety Monitoring",
     description:
-      "A real-time computer vision system for workplace safety compliance monitoring using YOLO models, reducing manual supervision and hazards by 60%.",
+      "Enterprise-grade computer vision surveillance system for real-time safety compliance monitoring on manufacturing floors. Deployed across multiple camera streams, reducing manual supervision and on-the-job hazards by 60% while ensuring continuous workplace safety compliance.",
     tags: [
       {
         name: "Python",
@@ -275,93 +271,22 @@ const projects = [
         name: "fastapi",
         color: "white-text-gradient",
       },
- 
+
     ],
     image: SafeAct,
-    source_code_link: "https://github.com/GhoshNet/",
+    source_code_link: "https://github.com/tanmayghosh01",
   },
   {
-    name: "Movie Recommendation System",
+    name: "Document QnA with RAG",
     description:
-      "A movie recommendation system that uses machine learning to recommend movies to users based on their viewing history and preferences.",
-    tags: [
-      {
-        name: "Python",
-        color: "blue-text-gradient",
-      },
-      // {
-      //   name: "emailJs",
-      //   color: "green-text-gradient",
-      // },
-      // {
-      //   name: "Gsap",
-      //   color: "pink-text-gradient",
-      // },
-    ],
-      image: MovieRecommendation,
-    source_code_link: "https://github.com/GhoshNet/",
-  },
-  {
-    name: "Explicit Content Detection",
-    description:
-      "An explicit content detection system that uses machine learning to detect explicit content in images and block or report them before the user uploads or sees them.",
+      "Retrieval-Augmented Generation (RAG) platform enabling efficient question-answering on custom documents. Fine-tuned Mistral-7B LLM to enhance knowledge retrieval, reducing response time for company operations by 40% while maintaining high accuracy on domain-specific queries.",
     tags: [
       {
         name: "Python",
         color: "blue-text-gradient",
       },
       {
-        name: "Streamlit",
-        color: "white-text-gradient",
-      },
-      // {
-      //   name: "node",
-      //   color: "green-text-gradient",
-      // },
-      // {
-      //   name: "mongodb",
-      //   color: "green-text-gradient",
-      // },
-    ],
-    image: ParentalAdvisory,
-    source_code_link: "https://github.com/GhoshNet/",
-  },
-  {
-    name: "Criminal Database Management System",
-    description:
-      "A criminal database management system that allows the user to add, delete, update and search for criminals in the database.",
-    tags: [
-      {
-        name: "Python",
-        color: "blue-text-gradient",
-      },
-      // {
-      //   name: "Streamlit",
-      //   color: "white-text-gradient",
-      // },
-      // {
-      //   name: "node",
-      //   color: "green-text-gradient",
-      // },
-      {
-        name: "mongodb",
-        color: "green-text-gradient",
-      },
-    ],
-    image: criminal,
-    source_code_link: "https://github.com/GhoshNet/",
-  },
-  {
-    name: "Document-based Chatbot",
-    description:
-      "A document-based question-answering platform that allows the user to ask questions about anything and get the answers from the documents already present in the database.",
-    tags: [
-      {
-        name: "Python",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "react",
+        name: "Mistral-7B",
         color: "white-text-gradient",
       },
       {
@@ -370,16 +295,70 @@ const projects = [
       },
       {
         name: "ChromaDB",
-        color: "green-text-gradient",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "React",
+        color: "blue-text-gradient",
       },
     ],
-      image: ActinAiHub,
-    source_code_link: "https://github.com/GhoshNet/",
+    image: ActinAiHub,
+    source_code_link: "https://github.com/tanmayghosh01",
   },
   {
-    name: "Automated Invoice Processing System",
+    name: "Automated Invoice Processing",
     description:
-      "An automated invoice processing system that allows the user to upload an invoice and get the details of the invoice in a structured format.",
+      "Vision-Language Model (VLM) solution extracting structured data from invoice images to automate ERP data entry. Reduced manual effort by 70% while achieving high accuracy in text extraction and data validation, processing hundreds of invoices daily.",
+    tags: [
+      {
+        name: "Python",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "VLM",
+        color: "white-text-gradient",
+      },
+      {
+        name: "Tesseract",
+        color: "green-text-gradient",
+      },
+      {
+        name: "FastAPI",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: InvoiceProcessing,
+    source_code_link: "https://github.com/tanmayghosh01",
+  },
+  {
+    name: "Automated Meter Reading (OCR)",
+    description:
+      "Deep learning-based OCR solution for capturing readings from production floor meters and checkpoints. Achieved 96% accuracy while expediting the reading process by 2 hours daily, eliminating manual data entry errors and improving operational efficiency.",
+    tags: [
+      {
+        name: "Python",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "TensorFlow",
+        color: "white-text-gradient",
+      },
+      {
+        name: "OpenCV",
+        color: "green-text-gradient",
+      },
+      {
+        name: "FastAPI",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: project2,
+    source_code_link: "https://github.com/tanmayghosh01",
+  },
+  {
+    name: "Explicit Content Detection",
+    description:
+      "Award-winning hybrid approach combining Skin Tone Analysis, YOLO, and Random Forest to detect explicit images and malicious URLs on social media platforms. Published research paper and received 'Most Unique Project Idea of the Year' award. Trained custom vision models for robust content moderation.",
     tags: [
       {
         name: "Python",
@@ -390,18 +369,59 @@ const projects = [
         color: "white-text-gradient",
       },
       {
-        name: "Tesseract",
+        name: "Random Forest",
         color: "green-text-gradient",
       },
-      // {
-      //   name: "ChromaDB",
-      //   color: "green-text-gradient",
-      // },
+      {
+        name: "Streamlit",
+        color: "pink-text-gradient",
+      },
     ],
-    image: InvoiceProcessing,
-    source_code_link: "https://github.com/GhoshNet/",
+    image: ParentalAdvisory,
+    source_code_link: "https://github.com/tanmayghosh01",
   },
-  
+  {
+    name: "Movie Recommendation System",
+    description:
+      "Personalized content-based movie recommendation engine using cosine similarity on movie metadata. Suggests relevant movies based on viewing history, analyzing features like genre, cast, director, and plot to deliver accurate recommendations.",
+    tags: [
+      {
+        name: "Python",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Scikit-learn",
+        color: "white-text-gradient",
+      },
+      {
+        name: "Pandas",
+        color: "green-text-gradient",
+      },
+    ],
+    image: MovieRecommendation,
+    source_code_link: "https://github.com/tanmayghosh01",
+  },
+  {
+    name: "Criminal Database Management",
+    description:
+      "Secure platform for storing, managing, and retrieving criminal information with Role-Based Access Control (RBAC). Enables department-specific access to data and visualizations, ensuring data security while facilitating efficient law enforcement operations.",
+    tags: [
+      {
+        name: "Python",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "MongoDB",
+        color: "green-text-gradient",
+      },
+      {
+        name: "RBAC",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: criminal,
+    source_code_link: "https://github.com/tanmayghosh01",
+  },
 ];
 
 export { services, technologies, experiences, testimonials, projects };

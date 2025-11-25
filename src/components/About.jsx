@@ -73,13 +73,16 @@ const About = () => {
 
       <div ref={paragraphRef} className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px] space-y-4">
         <p>
-          I'm an AI-focused software developer with experience in building smart, real-time systems using computer vision and deep learning.
+          I'm a Computer Science postgraduate at <span className="text-white font-semibold">Trinity College Dublin</span>, specializing in <span className="text-white font-semibold">Intelligent Systems</span> with a focus on AI, Data Science, Knowledge Graphs, and Advanced Software Engineering.
         </p>
         <p>
-          From PPE detection to people counting module, license systems, user-friendly dashboards, LLMS and server deployments, I design scalable, backend-driven solutions powered by YOLO, FastAPI, and Python.
+          With 1.5+ years of professional experience, I've built production-grade AI/ML solutions that deliver measurable impact—from computer vision systems reducing workplace hazards by 60% to RAG-based platforms cutting response times by 40%.
         </p>
         <p>
-          I thrive on solving real-world problems with efficient and reliable AI-powered applications. Let’s build something impactful together.
+          My expertise spans <span className="text-white font-semibold">YOLO-based vision models, LLMs, FastAPI backends, and React frontends</span>. I specialize in transforming complex AI research into scalable, real-world applications that solve business problems and optimize operations.
+        </p>
+        <p>
+          Let's collaborate to build intelligent systems that make a difference.
         </p>
       </div>
 
