@@ -50,10 +50,9 @@ import {
 import actin from "../assets/company/actin_logo.png";
 import privacera from "../assets/company/privacera.webp";
 
-// University logos — replace these with actual logos once available
-// Add tcd_logo.png and mmcoe_logo.png to src/assets/company/
-import tcdLogo from "../assets/web.png";
-import mmcoeLogo from "../assets/backend.png";
+// Import University Logos seperately
+import tcdLogo from "../assets/company/tcd_logo.png";
+import mmcoeLogo from "../assets/company/mmcoe_logo.png";
 
 export const navLinks = [
 
