@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Social Links */}
           <div className="flex gap-6">
             <a
-              href="https://github.com/tanmayghosh01"
+              href="https://github.com/GhoshNet"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => trackSocialClick('GitHub')}
@@ -30,7 +30,7 @@ const Footer = () => {
               <FaLinkedin size={28} />
             </a>
             <a
-              href="mailto:tanmay.actin@gmail.com"
+              href="mailto:ghoshta@tcd.ie"
               onClick={() => trackSocialClick('Email')}
               className="hover:text-[#915EFF] transition-colors duration-300"
               aria-label="Email"

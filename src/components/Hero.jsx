@@ -22,7 +22,7 @@ const Hero = () => {
             Hi, I'm <span className='text-[#915EFF]'>Tanmay Ghosh</span>
           </h1>
           <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            AI/ML Engineer & Computer Science Graduate Student<br className='sm:block hidden' />
+            AI/ML Engineer & Computer Science Master's Student<br className='sm:block hidden' />
             at Trinity College Dublin, specializing in intelligent<br className='sm:block hidden' />
             systems, computer vision, and scalable AI solutions.
           </p>

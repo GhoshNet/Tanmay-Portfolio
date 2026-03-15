@@ -45,13 +45,13 @@ const Contact = () => {
 
     if (!serviceId || !templateId || !publicKey) {
       setLoading(false);
-      alert("Email service is not configured. Please contact me directly at tanmay.actin@gmail.com or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+      alert("Email service is not configured. Please contact me directly at ghoshta@tcd.ie or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
       return;
     }
 
     const timeoutId = setTimeout(() => {
       setLoading(false);
-      alert("Request timed out. Please try again or contact me directly at tanmay.actin@gmail.com or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+      alert("Request timed out. Please try again or contact me directly at ghoshta@tcd.ie or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
     }, 10000); // 10 seconds timeout
 
     try {
@@ -63,7 +63,7 @@ const Contact = () => {
             from_name: form.name,
             to_name: "Tanmay G",
             from_email: form.email, 
-            to_email: "tanmay.actin@gmail.com",
+            to_email: "ghoshta@tcd.ie",
             message: form.message,
           },
           publicKey
@@ -85,13 +85,13 @@ const Contact = () => {
           console.error(error);
 
           if (error.text === "The public key is required") {
-            alert("Email service is not configured. Please contact me directly at tanmay.actin@gmail.com or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+            alert("Email service is not configured. Please contact me directly at ghoshta@tcd.ie or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
           } else if (error.text === "The template is not found") {
-            alert("Email template not found. Please contact me directly at tanmay.actin@gmail.com or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+            alert("Email template not found. Please contact me directly at ghoshta@tcd.ie or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
           } else if (error.text === "The service is not found") {
-            alert("Email service not found. Please contact me directly at tanmay.actin@gmail.com or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+            alert("Email service not found. Please contact me directly at ghoshta@tcd.ie or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
           } else {
-            alert("Something went wrong with the email service. Please contact me directly at tanmay.actin@gmail.com or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+            alert("Something went wrong with the email service. Please contact me directly at ghoshta@tcd.ie or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
           }
         }
       );
@@ -99,7 +99,7 @@ const Contact = () => {
       clearTimeout(timeoutId);
       setLoading(false);
       console.error("Unexpected error:", error);
-      alert("An unexpected error occurred. Please contact me directly at tanmay.actin@gmail.com or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+      alert("An unexpected error occurred. Please contact me directly at ghoshta@tcd.ie or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
     }
   };
 

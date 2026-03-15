@@ -76,7 +76,7 @@ const About = () => {
           I'm a Computer Science postgraduate at <span className="text-white font-semibold">Trinity College Dublin</span>, specializing in <span className="text-white font-semibold">Intelligent Systems</span> with a focus on AI, Data Science, Knowledge Graphs, and Advanced Software Engineering.
         </p>
         <p>
-          With 1.5+ years of professional experience, I've built production-grade AI/ML solutions that deliver measurable impact—from computer vision systems reducing workplace hazards by 60% to RAG-based platforms cutting response times by 40%.
+          With 2+ years of professional experience, I've built production-grade AI/ML solutions that deliver measurable impact—from computer vision systems reducing workplace hazards by 60% to RAG-based platforms cutting response times by 40%.
         </p>
         <p>
           My expertise spans <span className="text-white font-semibold">YOLO-based vision models, LLMs, FastAPI backends, and React frontends</span>. I specialize in transforming complex AI research into scalable, real-world applications that solve business problems and optimize operations.

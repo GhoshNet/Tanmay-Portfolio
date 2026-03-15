@@ -283,9 +283,8 @@ Contributions, issues, and feature requests are welcome!
 ## 📧 Contact
 
 **Tanmay Ghosh**
-- Email: tanmay.actin@gmail.com
 - LinkedIn: [linkedin.com/in/tanmay-g](https://www.linkedin.com/in/tanmay-g/)
-- GitHub: [github.com/tanmayghosh01](https://github.com/tanmayghosh01)
+- GitHub: [github.com/GhoshNet](https://github.com/GhoshNet)
 
 ## 🙏 Acknowledgments
 
@@ -298,4 +297,4 @@ Contributions, issues, and feature requests are welcome!
 
 **Built with ❤️ by Tanmay Ghosh**
 
-*Last updated: November 2024*
+*Last updated: March 2026*

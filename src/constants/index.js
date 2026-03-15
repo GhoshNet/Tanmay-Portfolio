@@ -48,8 +48,12 @@ import {
 
 // Import Company Logos seperately
 import actin from "../assets/company/actin_logo.png";
+import privacera from "../assets/company/privacera.webp";
 
-import privacera from "../assets/company/privacera.webp"
+// University logos — replace these with actual logos once available
+// Add tcd_logo.png and mmcoe_logo.png to src/assets/company/
+import tcdLogo from "../assets/web.png";
+import mmcoeLogo from "../assets/backend.png";
 
 export const navLinks = [
 
@@ -61,7 +65,7 @@ export const navLinks = [
   },
   {
     id: "work",
-    title: "Work",
+    title: "Experiences",
   },
   {
     id: "contact",
@@ -125,24 +129,18 @@ const technologies = [
     name: "React JS",
     icon: reactjs,
   },
-  // {
-  //   name: "gsap",
-  //   icon: gsap,
-  // },
-  // {
-  //   name: "framer",
-  //   icon: framer,
-  // },
-
-
-  // {
-  //   name: "Three JS",
-  //   icon: threejs,
-  // },
-  // {
-  //   name: "figma",
-  //   icon: figma,
-  // },
+  {
+    name: "Three JS",
+    icon: threejs,
+  },
+  {
+    name: "GSAP",
+    icon: gsap,
+  },
+  {
+    name: "Framer Motion",
+    icon: framer,
+  },
   {
     name: "Redux Toolkit",
     icon: redux,
@@ -186,6 +184,18 @@ const technologies = [
 
 const experiences = [
   {
+    title: "MSc Computer Science – Intelligent Systems",
+    company_name: "Trinity College Dublin, The University of Dublin",
+    icon: tcdLogo,
+    iconBg: "#ffffff",
+    date: "Sept 2025 – August 2026",
+    points: [
+      "Pursuing a Master's in Computer Science with specialisation in Intelligent Systems at one of Europe's leading research universities, Dublin, Ireland.",
+      "Coursework: Advanced Software Engineering, Distributed Systems, Information Retrieval, AI/ML, Knowledge and Data Engineering, Data Visualization, Text Analytics, Statistical Modelling, and Adaptive Applications.",
+      "Active member of Trinity College's Boxing Club and Rifle Club.",
+    ],
+  },
+  {
     title: "AI-ML Engineer",
     company_name: "Actin Technologies",
     icon: actin,
@@ -210,6 +220,19 @@ const experiences = [
       "Participated in the complete Software Development Life Cycle (SDLC), from requirement analysis to production release.",
       "Collaborated with teams using Git, Jenkins, Jira, and Confluence for agile project delivery.",
       "Improved customer satisfaction by debugging and enhancing core platform features.",
+    ],
+  },
+  {
+    title: "BE Information Technology (Honours in Data Science)",
+    company_name: "MMCOE, Savitribai Phule Pune University, India",
+    icon: mmcoeLogo,
+    iconBg: "#ffffff",
+    date: "August 2019 – April 2023",
+    points: [
+      "Graduated with a CGPA of 9.12/10 with First Class Honours from Marathwada Mitra Mandal's College of Engineering, affiliated with Savitribai Phule Pune University, Pune, India.",
+      "Awarded Department Topper of the Year in the third year of study.",
+      "Secured 3rd position in UDAAN Model Development inter-college competition.",
+      "Published research on hybrid ML-based explicit content and malicious URL detection; received 'Most Unique Project Idea of the Year' award.",
     ],
   },
 ];
@@ -274,7 +297,7 @@ const projects = [
 
     ],
     image: SafeAct,
-    source_code_link: "https://github.com/tanmayghosh01",
+    source_code_link: "https://github.com/GhoshNet",
   },
   {
     name: "Document QnA with RAG",
@@ -303,7 +326,7 @@ const projects = [
       },
     ],
     image: ActinAiHub,
-    source_code_link: "https://github.com/tanmayghosh01",
+    source_code_link: "https://github.com/GhoshNet",
   },
   {
     name: "Automated Invoice Processing",
@@ -328,7 +351,7 @@ const projects = [
       },
     ],
     image: InvoiceProcessing,
-    source_code_link: "https://github.com/tanmayghosh01",
+    source_code_link: "https://github.com/GhoshNet",
   },
   {
     name: "Automated Meter Reading (OCR)",
@@ -353,7 +376,7 @@ const projects = [
       },
     ],
     image: project2,
-    source_code_link: "https://github.com/tanmayghosh01",
+    source_code_link: "https://github.com/GhoshNet",
   },
   {
     name: "Explicit Content Detection",
@@ -378,7 +401,7 @@ const projects = [
       },
     ],
     image: ParentalAdvisory,
-    source_code_link: "https://github.com/tanmayghosh01",
+    source_code_link: "https://github.com/GhoshNet",
   },
   {
     name: "Movie Recommendation System",
@@ -399,7 +422,7 @@ const projects = [
       },
     ],
     image: MovieRecommendation,
-    source_code_link: "https://github.com/tanmayghosh01",
+    source_code_link: "https://github.com/GhoshNet",
   },
   {
     name: "Criminal Database Management",
@@ -420,7 +443,7 @@ const projects = [
       },
     ],
     image: criminal,
-    source_code_link: "https://github.com/tanmayghosh01",
+    source_code_link: "https://github.com/GhoshNet",
   },
 ];
 
