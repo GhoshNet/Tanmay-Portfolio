@@ -50,6 +50,8 @@ import {
 import actin from "../assets/company/actin_logo.png";
 import privacera from "../assets/company/privacera.webp";
 
+import constellation from "../assets/company/com_constellation_logo_01.png";
+
 // Import University Logos seperately
 import tcdLogo from "../assets/company/tcd_logo.png";
 import mmcoeLogo from "../assets/company/mmcoe_logo.png";
@@ -65,6 +67,14 @@ export const navLinks = [
   {
     id: "work",
     title: "Experiences",
+  },
+  {
+    id: "certifications",
+    title: "Achievements",
+  },
+  {
+    id: "beyond",
+    title: "Beyond",
   },
   {
     id: "contact",
@@ -195,6 +205,18 @@ const experiences = [
     ],
   },
   {
+    title: "Events & Hospitality Crew (Part-Time)",
+    company_name: "Constellation Ireland",
+    icon: constellation,
+    iconBg: "#ffffff",
+    date: "Feb 2026 – Present",
+    points: [
+      "Delivering front-of-house service, till operation, and beverage service at major Dublin venues including Aviva Stadium, Fairyhouse Racecourse, and the Convention Centre Dublin (CCD).",
+      "Providing high-volume customer service during live events while maintaining speed and accuracy under pressure.",
+      "Handling cash transactions, POS systems, and stock replenishment during peak event hours, balanced alongside full-time MSc studies.",
+    ],
+  },
+  {
     title: "AI-ML Engineer",
     company_name: "Actin Technologies",
     icon: actin,
@@ -233,6 +255,61 @@ const experiences = [
       "Secured 3rd position in UDAAN Model Development inter-college competition.",
       "Published research on hybrid ML-based explicit content and malicious URL detection; received 'Most Unique Project Idea of the Year' award.",
     ],
+  },
+];
+
+const certifications = [
+  {
+    title: "AWS Certified AI Practitioner",
+    issuer: "Amazon Web Services",
+  },
+  {
+    title: "Microsoft Certified: Azure Fundamentals",
+    issuer: "Microsoft",
+  },
+  {
+    title: "HACCP Food Safety — Level 1 & Level 2",
+    issuer: "Food Safety Certification",
+  },
+];
+
+const achievements = [
+  {
+    title: "Trinity Career Skills Award",
+    year: "2026",
+    description:
+      "Awarded by Trinity College Dublin for completing employer partnership activities, 20+ hours of experiential learning, and a personal development challenge.",
+  },
+  {
+    title: "Certificate of Appreciation",
+    year: "2024",
+    description:
+      "Recognised by Actin Technologies for consistent performance and contribution.",
+  },
+  {
+    title: "Most Unique Project Idea of the Year",
+    year: "2023",
+    description:
+      "Awarded at MMCOE / Pune University for the Explicit Image & Malicious URL Detection research project.",
+  },
+  {
+    title: "Published Research — IJIRT",
+    year: "2023",
+    description:
+      "Lead author of a hybrid ML approach for malicious URL and explicit image detection, published in the International Journal of Innovative Research in Technology.",
+    link: "https://ijirt.org/publishedpaper/IJIRT172831_PAPER.pdf",
+  },
+  {
+    title: "Department Topper of the Year",
+    year: "2022",
+    description:
+      "Awarded for top academic standing in the third year of the BE Information Technology programme at MMCOE, Pune.",
+  },
+  {
+    title: "3rd Place — UDAAN Model Development",
+    year: "2022",
+    description:
+      "Secured third position in the UDAAN inter-college model development competition.",
   },
 ];
 
@@ -400,7 +477,7 @@ const projects = [
       },
     ],
     image: ParentalAdvisory,
-    source_code_link: "https://github.com/GhoshNet",
+    source_code_link: "https://github.com/GhoshNet/Explicit-Content-Detection",
   },
   {
     name: "Movie Recommendation System",
@@ -446,4 +523,4 @@ const projects = [
   },
 ];
 
-export { services, technologies, experiences, testimonials, projects };
+export { services, technologies, experiences, testimonials, projects, certifications, achievements };
