@@ -16,7 +16,7 @@ A modern, interactive portfolio website showcasing AI/ML projects, professional 
 
 ## 🚀 Live Demo
 
-Visit the live portfolio: [tanmayghosh.dev](https://tanmayghosh.dev) *(update with your actual URL)*
+Visit the live portfolio: [ghoshnet.github.io/Tanmay-Portfolio](https://ghoshnet.github.io/Tanmay-Portfolio/)
 
 ## 🛠️ Tech Stack
 
@@ -49,8 +49,8 @@ Visit the live portfolio: [tanmayghosh.dev](https://tanmayghosh.dev) *(update wi
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/tanmayghosh01/portfolio.git
-   cd portfolio
+   git clone https://github.com/GhoshNet/Tanmay-Portfolio.git
+   cd Tanmay-Portfolio
    ```
 
 2. **Install dependencies**
@@ -69,7 +69,7 @@ Visit the live portfolio: [tanmayghosh.dev](https://tanmayghosh.dev) *(update wi
 
 4. **Add your resume**
    - Place your resume PDF in `/public/resume.pdf`
-   - Ensure the filename matches the download link in `Hero.jsx`
+   - Ensure the filename matches the download link in `Navbar.jsx`
 
 5. **Run development server**
    ```bash
@@ -117,9 +117,11 @@ Quick setup:
 
 3. **Hero Section** (`src/components/Hero.jsx`):
    - Update tagline and introduction
-   - Update LinkedIn URL
 
-4. **Footer** (`src/components/Footer.jsx`):
+4. **Navbar** (`src/components/Navbar.jsx`):
+   - Update nav links, resume download link, and LinkedIn URL
+
+5. **Footer** (`src/components/Footer.jsx`):
    - Update social media links
    - Update email address
 
@@ -134,10 +136,14 @@ portfolio/
 │   ├── assets/             # Images, icons, 3D models
 │   ├── components/         # React components
 │   │   ├── About.jsx
+│   │   ├── Beyond.jsx
+│   │   ├── Certifications.jsx
 │   │   ├── Contact.jsx
 │   │   ├── Experience.jsx
+│   │   ├── Feedbacks.jsx
 │   │   ├── Footer.jsx
 │   │   ├── Hero.jsx
+│   │   ├── Loader.jsx
 │   │   ├── Navbar.jsx
 │   │   ├── Tech.jsx
 │   │   ├── Works.jsx
@@ -228,12 +234,14 @@ This creates an optimized production build in the `dist/` folder.
 
 2. Add to `package.json`:
    ```json
-   "homepage": "https://yourusername.github.io/portfolio",
+   "homepage": "https://ghoshnet.github.io/Tanmay-Portfolio/",
    "scripts": {
      "predeploy": "npm run build",
      "deploy": "gh-pages -d dist"
    }
    ```
+
+   > Note: `vite.config.js` already sets `base: '/Tanmay-Portfolio/'`, which is required for the project site to resolve assets correctly on GitHub Pages.
 
 3. Deploy:
    ```bash
@@ -297,4 +305,4 @@ Contributions, issues, and feature requests are welcome!
 
 **Built with ❤️ by Tanmay Ghosh**
 
-*Last updated: March 2026*
+*Last updated: June 2026*
