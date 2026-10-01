@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Tilt } from "react-tilt";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FaLock } from "react-icons/fa6";
 
 import { styles } from "../styles";
 import { github } from "../assets";
@@ -19,6 +20,7 @@ const ProjectCard = ({
   tags,
   image,
   source_code_link,
+  isEnterprise,
 }) => {
   const cardRef = useRef(null);
 
@@ -59,17 +61,38 @@ const ProjectCard = ({
         <div className="relative w-full h-[230px]">
           <img
             src={image}
-            alt="project_image"
+            alt={`${name} project screenshot`}
             className="w-full h-full object-cover object-left rounded-2xl"
           />
 
-          <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
+          <div className="absolute inset-0 flex justify-end m-3 card-img_hover gap-2">
+            {/* Enterprise / Private badge */}
+            {isEnterprise && (
+              <div
+                className="bg-black/70 backdrop-blur-sm w-auto h-8 px-3 rounded-full flex items-center gap-1.5 pointer-events-none"
+                title="Enterprise / Private Project"
+              >
+                <FaLock className="text-[#915EFF] text-[10px]" />
+                <span className="text-white text-[10px] font-medium">Enterprise</span>
+              </div>
+            )}
+
+            {/* GitHub link */}
             <div
               onClick={() => {
                 trackProjectClick(name);
                 window.open(source_code_link, "_blank");
               }}
               className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
+              role="button"
+              tabIndex={0}
+              aria-label={`View ${name} source code on GitHub`}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  trackProjectClick(name);
+                  window.open(source_code_link, "_blank");
+                }
+              }}
             >
               <img
                 src={github}
@@ -133,7 +156,7 @@ const Works = () => {
 
       <div className="w-full flex">
         <p className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]">
-          Following projects showcase my skills and experience through real-world examples of my work. Each project is briefly described with links to code repositories and live demos. It reflects my ability to solve complex problems, work with different technologies, and manage projects effectively.
+          The following projects showcase real-world AI/ML systems I've built — from computer vision pipelines to LLM-powered platforms. Enterprise projects are marked accordingly, while personal and academic projects include direct links to source code.
         </p>
       </div>
 

@@ -5,12 +5,11 @@ import About from "./About";
 import Tech from "./Tech";
 import Experience from "./Experience";
 import Works from "./Works";
-import Certifications from "./Certifications";
-import Beyond from "./Beyond";
 import Feedbacks from "./Feedbacks";
 import Contact from "./Contact";
-import CanvasLoader from "./Loader";
-
+import Certifications from "./Certifications";
+import Beyond from "./Beyond";
+import Publications from "./Publications";
 
 export {
   Hero,
@@ -19,12 +18,12 @@ export {
   Tech,
   Experience,
   Works,
-  Certifications,
-  Beyond,
   Feedbacks,
   Contact,
-  CanvasLoader,
-  EarthCanvas, 
-  ComputersCanvas, 
-  StarsCanvas
+  EarthCanvas,
+  ComputersCanvas,
+  StarsCanvas,
+  Certifications,
+  Beyond,
+  Publications,
 };

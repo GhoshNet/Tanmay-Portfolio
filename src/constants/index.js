@@ -42,17 +42,21 @@ import {
   YOLO,
   openCV,
   fastapi,
-  grpc
+  grpc,
+  pytorch,
+  tensorflow,
+  docker,
+  huggingface,
 } from '../assets'
 
 
-// Import Company Logos seperately
+// Import Company Logos separately
 import actin from "../assets/company/actin_logo.png";
 import privacera from "../assets/company/privacera.webp";
 
 import constellation from "../assets/company/com_constellation_logo_01.png";
 
-// Import University Logos seperately
+// Import University Logos separately
 import tcdLogo from "../assets/company/tcd_logo.png";
 import mmcoeLogo from "../assets/company/mmcoe_logo.png";
 
@@ -67,6 +71,10 @@ export const navLinks = [
   {
     id: "work",
     title: "Experiences",
+  },
+  {
+    id: "publications",
+    title: "Publications",
   },
   {
     id: "certifications",
@@ -101,7 +109,9 @@ const services = [
   },
 ];
 
+// Technologies ordered: AI/ML first, then systems, then web
 const technologies = [
+  // --- AI / ML / Data Science ---
   {
     name: "Python",
     icon: python
@@ -115,21 +125,43 @@ const technologies = [
     icon: openCV
   },
   {
-    name: "fastapi",
+    name: "PyTorch",
+    icon: pytorch
+  },
+  {
+    name: "TensorFlow",
+    icon: tensorflow
+  },
+  {
+    name: "Hugging Face",
+    icon: huggingface
+  },
+  {
+    name: "LangChain",
+    icon: langchain
+  },
+  // --- Systems / Infrastructure ---
+  {
+    name: "FastAPI",
     icon: fastapi
   },
   {
-    name: "grpc",
+    name: "gRPC",
     icon: grpc
   },
   {
-    name: "HTML 5",
-    icon: html,
+    name: "Docker",
+    icon: docker
   },
   {
-    name: "CSS 3",
-    icon: css,
+    name: "AWS",
+    icon: aws,
   },
+  {
+    name: "git",
+    icon: git,
+  },
+  // --- Web / Frontend ---
   {
     name: "JavaScript",
     icon: javascript,
@@ -139,6 +171,10 @@ const technologies = [
     icon: reactjs,
   },
   {
+    name: "Node JS",
+    icon: nodejs,
+  },
+  {
     name: "Three JS",
     icon: threejs,
   },
@@ -146,49 +182,15 @@ const technologies = [
     name: "GSAP",
     icon: gsap,
   },
-  {
-    name: "Framer Motion",
-    icon: framer,
-  },
-  {
-    name: "Redux Toolkit",
-    icon: redux,
-  },
-  {
-    name: "Tailwind CSS",
-    icon: tailwind,
-  },
-  {
-    name: "Material Ui",
-    icon: mui,
-  },
-  {
-    name: "Node JS",
-    icon: nodejs,
-  },
-  // {
-  //   name: "Express Js",
-  //   icon: express,
-  // },
-  {
-    name: "AWS",
-    icon: aws,
-  },
+  // --- Databases ---
   {
     name: "MongoDB",
     icon: mongodb,
   },
   {
-    name: "MySql",
+    name: "MySQL",
     icon: mysql,
   },
-
-  {
-    name: "git",
-    icon: git,
-  },
-
-
 ];
 
 const experiences = [
@@ -205,18 +207,6 @@ const experiences = [
     ],
   },
   {
-    title: "Events & Hospitality Crew (Part-Time)",
-    company_name: "Constellation Ireland",
-    icon: constellation,
-    iconBg: "#ffffff",
-    date: "Feb 2026 – Present",
-    points: [
-      "Delivering front-of-house service, till operation, and beverage service at major Dublin venues including Aviva Stadium, Fairyhouse Racecourse, and the Convention Centre Dublin (CCD).",
-      "Providing high-volume customer service during live events while maintaining speed and accuracy under pressure.",
-      "Handling cash transactions, POS systems, and stock replenishment during peak event hours, balanced alongside full-time MSc studies.",
-    ],
-  },
-  {
     title: "AI-ML Engineer",
     company_name: "Actin Technologies",
     icon: actin,
@@ -228,6 +218,7 @@ const experiences = [
       "Developed a document-based QnA system using Retrieval-Augmented Generation (RAG) and fine-tuned LLM to streamline enterprise knowledge access.",
       "Created an EDA chatbot capable of handling natural language queries to dynamically generate insights and visualizations.",
       "Engineered a Vision-Language Model (VLM)-based system to extract invoice data from images and integrate with ERP, reducing manual effort by 70%.",
+      "Led a team of 5 interns — reviewed code, managed sprints, and delivered production-ready features on schedule.",
     ],
   },
   {
@@ -254,6 +245,22 @@ const experiences = [
       "Awarded Department Topper of the Year in the third year of study.",
       "Secured 3rd position in UDAAN Model Development inter-college competition.",
       "Published research on hybrid ML-based explicit content and malicious URL detection; received 'Most Unique Project Idea of the Year' award.",
+    ],
+  },
+];
+
+// Part-time roles shown separately in the "Beyond" section
+const partTimeRoles = [
+  {
+    title: "Events & Hospitality Crew (Part-Time)",
+    company_name: "Constellation Ireland",
+    icon: constellation,
+    iconBg: "#ffffff",
+    date: "Feb 2026 – Present",
+    points: [
+      "Delivering front-of-house service, till operation, and beverage service at major Dublin venues including Aviva Stadium, Fairyhouse Racecourse, and the Convention Centre Dublin (CCD).",
+      "Providing high-volume customer service during live events while maintaining speed and accuracy under pressure.",
+      "Handling cash transactions, POS systems, and stock replenishment during peak event hours, balanced alongside full-time MSc studies.",
     ],
   },
 ];
@@ -313,32 +320,47 @@ const achievements = [
   },
 ];
 
-const testimonials = [
+const publications = [
   {
-    testimonial:
-      "Testimonial's Comment",
-    name: "V Mahajan",
-    designation: "CEO",
-    company: "Actin",
-    image: firstTestimonial,
-  },
-  {
-    testimonial:
-      "Testimonial's Opinion",
-    name: "P Kumar",
-    designation: "CTO",
-    company: "Tech Company name",
-    image: secondTestimonial,
-  },
-  {
-    testimonial:
-      "Testimonial's Review",
-    name: "James Wang",
-    designation: "Senior Manager",
-    company: "456 Enterprises",
-    image: thirdTestimonial,
+    title: "Malicious URL and Explicit Image Detection for Social Media Platforms",
+    subtitle: "A Hybrid Approach Using Skin Tone Analysis, YOLO, and Random Forest",
+    journal: "International Journal of Innovative Research in Technology (IJIRT)",
+    year: "2023",
+    role: "Lead Researcher & Co-Author",
+    description:
+      "Developed a hybrid machine learning system combining Skin Tone Analysis, YOLO object detection, and Random Forest classification to detect explicit images and malicious URLs on social media platforms. The approach automates content moderation pipelines using a custom-built dataset and multi-modal detection strategy.",
+    link: "https://ijirt.org/publishedpaper/IJIRT172831_PAPER.pdf",
   },
 ];
+
+// ──────────────────────────────────────────────────────────────────────────────
+// TESTIMONIALS — Placeholder / Template
+// Uncomment the <Feedbacks /> component in App.jsx and populate this array
+// with real testimonials when available.
+// ──────────────────────────────────────────────────────────────────────────────
+// const testimonials = [
+//   {
+//     testimonial: "Quote from colleague or manager here.",
+//     name: "Full Name",
+//     designation: "Title",
+//     company: "Company",
+//     image: firstTestimonial,
+//   },
+//   {
+//     testimonial: "Quote from colleague or manager here.",
+//     name: "Full Name",
+//     designation: "Title",
+//     company: "Company",
+//     image: secondTestimonial,
+//   },
+//   {
+//     testimonial: "Quote from colleague or manager here.",
+//     name: "Full Name",
+//     designation: "Title",
+//     company: "Company",
+//     image: thirdTestimonial,
+//   },
+// ];
 
 const projects = [
   {
@@ -363,17 +385,18 @@ const projects = [
         color: "green-text-gradient",
       },
       {
-        name: "react",
+        name: "React",
         color: "blue-text-gradient",
       },
       {
-        name: "fastapi",
+        name: "FastAPI",
         color: "white-text-gradient",
       },
 
     ],
     image: SafeAct,
     source_code_link: "https://github.com/GhoshNet",
+    isEnterprise: true,
   },
   {
     name: "Document QnA with RAG",
@@ -403,6 +426,7 @@ const projects = [
     ],
     image: ActinAiHub,
     source_code_link: "https://github.com/GhoshNet",
+    isEnterprise: true,
   },
   {
     name: "Automated Invoice Processing",
@@ -428,6 +452,7 @@ const projects = [
     ],
     image: InvoiceProcessing,
     source_code_link: "https://github.com/GhoshNet",
+    isEnterprise: true,
   },
   {
     name: "Automated Meter Reading (OCR)",
@@ -453,6 +478,7 @@ const projects = [
     ],
     image: project2,
     source_code_link: "https://github.com/GhoshNet",
+    isEnterprise: true,
   },
   {
     name: "Explicit Content Detection",
@@ -478,6 +504,7 @@ const projects = [
     ],
     image: ParentalAdvisory,
     source_code_link: "https://github.com/GhoshNet/Explicit-Content-Detection",
+    isEnterprise: false,
   },
   {
     name: "Movie Recommendation System",
@@ -499,6 +526,7 @@ const projects = [
     ],
     image: MovieRecommendation,
     source_code_link: "https://github.com/GhoshNet",
+    isEnterprise: false,
   },
   {
     name: "Criminal Database Management",
@@ -520,7 +548,8 @@ const projects = [
     ],
     image: criminal,
     source_code_link: "https://github.com/GhoshNet",
+    isEnterprise: false,
   },
 ];
 
-export { services, technologies, experiences, testimonials, projects, certifications, achievements };
+export { services, technologies, experiences, projects, certifications, achievements, publications, partTimeRoles };

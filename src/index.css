@@ -118,6 +118,22 @@
   -webkit-text-fill-color: transparent;
 }
 
+.white-text-gradient {
+  background: #e0e0e0;
+  background: -webkit-linear-gradient(
+    to top,
+    #b0b0b0,
+    #ffffff
+  );
+  background: linear-gradient(
+    to top,
+    #b0b0b0,
+    #ffffff
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 /* canvas- styles */
 .canvas-loader {
   font-size: 10px;

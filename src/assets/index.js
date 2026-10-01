@@ -31,6 +31,10 @@ import openCV from "./tech/OpenCV.svg"
 import YOLO from "./tech/Ultralytics_YOLO_Logomark_Original.svg";
 import fastapi from "./tech/fastapi.svg";
 import grpc from "./tech/grpc.png";
+import pytorch from "./tech/pytorch.svg";
+import tensorflow from "./tech/tensorflow.svg";
+import docker from "./tech/docker.svg";
+import huggingface from "./tech/huggingface.svg";
 import firstTestimonial from './Tars Ken.webp';
 import secondTestimonial from './image.webp';
 import thirdTestimonial from './third testimonial.webp'
@@ -87,5 +91,9 @@ export {
   YOLO,
   openCV,
   fastapi,
-  grpc
+  grpc,
+  pytorch,
+  tensorflow,
+  docker,
+  huggingface,
 };

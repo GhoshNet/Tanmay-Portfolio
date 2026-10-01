@@ -87,12 +87,19 @@ const Navbar = () => {
         </ul>
 
         <div className='sm:hidden flex flex-1 justify-end items-center'>
-          <img
-            src={toggle ? close : menu}
-            alt='menu'
-            className='w-[28px] h-[28px] object-contain'
+          <button
+            type="button"
+            aria-label={toggle ? "Close menu" : "Open menu"}
+            aria-expanded={toggle}
             onClick={() => setToggle(!toggle)}
-          />
+            className="bg-transparent border-none p-0"
+          >
+            <img
+              src={toggle ? close : menu}
+              alt=''
+              className='w-[28px] h-[28px] object-contain'
+            />
+          </button>
 
           <div
             className={`${!toggle ? "hidden" : "flex"

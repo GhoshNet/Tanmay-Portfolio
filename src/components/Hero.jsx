@@ -2,10 +2,9 @@ import { motion } from "framer-motion";
 
 import { styles } from "../styles";
 import { ComputersCanvas } from "./canvas";
-import { trackResumeDownload, trackSocialClick } from "../utils/analytics";
+import { trackResumeDownload } from "../utils/analytics";
 
 const Hero = () => {
-
 
   return (
     <section className={`relative w-full h-screen mx-auto`}>
@@ -26,15 +25,31 @@ const Hero = () => {
             at Trinity College Dublin, specializing in intelligent<br className='sm:block hidden' />
             systems, computer vision, and scalable AI solutions.
           </p>
+
+          {/* CTA Buttons */}
+          <div className="mt-8 flex flex-wrap gap-4">
+            <a
+              href="/resume.pdf"
+              download="Tanmay_Ghosh_Resume.pdf"
+              onClick={trackResumeDownload}
+              className="bg-[#915EFF] hover:bg-[#7c4ddb] text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-[#915EFF]/25 hover:-translate-y-0.5"
+            >
+              Download Resume
+            </a>
+            <a
+              href="#work"
+              className="border-2 border-[#915EFF] text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 hover:bg-[#915EFF]/10 hover:-translate-y-0.5"
+            >
+              View Projects
+            </a>
+          </div>
         </div>
       </div>
 
       <ComputersCanvas />
 
-
-
       <div className='absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center'>
-        <a href='#about'>
+        <a href='#about' aria-label="Scroll down to About section">
           <div className='w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2'>
             <motion.div
               animate={{

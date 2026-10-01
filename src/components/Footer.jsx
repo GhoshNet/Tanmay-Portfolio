@@ -1,5 +1,5 @@
 import React from "react";
-import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa6";
+import { FaGithub, FaLinkedin } from "react-icons/fa6";
 import { trackSocialClick } from "../utils/analytics";
 
 const Footer = () => {
@@ -28,14 +28,6 @@ const Footer = () => {
               aria-label="LinkedIn Profile"
             >
               <FaLinkedin size={28} />
-            </a>
-            <a
-              href="mailto:ghoshta@tcd.ie"
-              onClick={() => trackSocialClick('Email')}
-              className="hover:text-[#915EFF] transition-colors duration-300"
-              aria-label="Email"
-            >
-              <FaEnvelope size={28} />
             </a>
           </div>
 

@@ -16,29 +16,57 @@
   <meta name="author" content="Tanmay Ghosh" />
   <meta name="robots" content="index, follow" />
 
-  <!-- Open Graph / Facebook Meta Tags -->
+  <!-- Open Graph / Social Meta Tags -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tanmayghosh.dev/" />
   <meta property="og:title" content="Tanmay Ghosh - AI/ML Engineer Portfolio" />
   <meta property="og:description"
     content="AI/ML Engineer specializing in computer vision, LLMs, and intelligent systems. Graduate student at Trinity College Dublin." />
-  <meta property="og:image" content="/og-image.png" />
+  <meta property="og:image" content="/og-image.jpg" />
 
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://tanmayghosh.dev/" />
-  <meta name="twitter:title" content="Tanmay Ghosh - AI/ML Engineer" />
-  <meta name="twitter:description"
-    content="AI/ML Engineer specializing in computer vision and intelligent systems at Trinity College Dublin" />
-  <meta name="twitter:image" content="/twitter-image.png" />
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Tanmay Ghosh",
+      "jobTitle": "AI/ML Engineer",
+      "alumniOf": [
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Trinity College Dublin"
+        },
+        {
+          "@type": "CollegeOrUniversity",
+          "name": "Savitribai Phule Pune University"
+        }
+      ],
+      "knowsAbout": ["Artificial Intelligence", "Machine Learning", "Computer Vision", "Deep Learning", "LLMs", "RAG"],
+      "sameAs": [
+        "https://www.linkedin.com/in/tanmay-g/",
+        "https://github.com/GhoshNet"
+      ]
+    }
+  </script>
 
-  <!-- Google Analytics 4 -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <!-- Google Analytics 4 (Free) — Only loads if measurement ID is configured -->
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
+    // GA4 is loaded dynamically so it doesn't fire with a placeholder ID
+    (function () {
+      // Replace 'G-XXXXXXXXXX' with your actual GA4 Measurement ID in .env
+      // To get one: https://analytics.google.com → Create Property → Get Measurement ID
+      var GA_ID = 'G-XXXXXXXXXX'; // TODO: Replace with real ID
+      if (GA_ID && GA_ID !== 'G-XXXXXXXXXX') {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+        document.head.appendChild(script);
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+      }
+    })();
   </script>
 </head>
 

@@ -4,7 +4,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
-import { testimonials } from "../constants";
+
+// Testimonials data is currently disabled — see constants/index.js for the template.
+// Uncomment and populate with real testimonials when ready.
+const testimonials = [];
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);

@@ -6,6 +6,7 @@ import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { slideIn } from "../utils/motion";
+import { trackContactFormSubmit } from "../utils/analytics";
 
 const Contact = () => {
   const formRef = useRef();
@@ -17,7 +18,7 @@ const Contact = () => {
 
   const [loading, setLoading] = useState(false);
 
-  // Initialize EmailJS
+  // Initialize EmailJS once on mount
   useEffect(() => {
     const publicKey = import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY;
     if (publicKey) {
@@ -45,34 +46,33 @@ const Contact = () => {
 
     if (!serviceId || !templateId || !publicKey) {
       setLoading(false);
-      alert("Email service is not configured. Please contact me directly at ghoshta@tcd.ie or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
+      alert("Email service is not configured yet. Please reach out to me via LinkedIn.");
       return;
     }
 
     const timeoutId = setTimeout(() => {
       setLoading(false);
-      alert("Request timed out. Please try again or contact me directly at ghoshta@tcd.ie or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
-    }, 10000); // 10 seconds timeout
+      alert("Request timed out. Please try again or reach out via LinkedIn.");
+    }, 10000);
 
-    try {
-      emailjs
-        .send(
-          serviceId,
-          templateId,
-          {
-            from_name: form.name,
-            to_name: "Tanmay G",
-            from_email: form.email, 
-            to_email: "ghoshta@tcd.ie",
-            message: form.message,
-          },
-          publicKey
-        )
-        .then(
+    emailjs
+      .send(
+        serviceId,
+        templateId,
+        {
+          name: form.name,
+          email: form.email,
+          title: form.name,
+          message: form.message,
+        },
+        publicKey
+      )
+      .then(
         () => {
           clearTimeout(timeoutId);
           setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible. Alternatively, you can reach me at through my LinkedIn profile: https://www.linkedin.com/in/tanmay-g");
+          trackContactFormSubmit();
+          alert("Thank you for reaching out! I'll get back to you as soon as possible.");
           setForm({
             name: "",
             email: "",
@@ -82,25 +82,10 @@ const Contact = () => {
         (error) => {
           clearTimeout(timeoutId);
           setLoading(false);
-          console.error(error);
-
-          if (error.text === "The public key is required") {
-            alert("Email service is not configured. Please contact me directly at ghoshta@tcd.ie or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
-          } else if (error.text === "The template is not found") {
-            alert("Email template not found. Please contact me directly at ghoshta@tcd.ie or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
-          } else if (error.text === "The service is not found") {
-            alert("Email service not found. Please contact me directly at ghoshta@tcd.ie or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
-          } else {
-            alert("Something went wrong with the email service. Please contact me directly at ghoshta@tcd.ie or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
-          }
+          console.error("EmailJS error:", error);
+          alert("Something went wrong. Please try reaching out via LinkedIn instead.");
         }
       );
-    } catch (error) {
-      clearTimeout(timeoutId);
-      setLoading(false);
-      console.error("Unexpected error:", error);
-      alert("An unexpected error occurred. Please contact me directly at ghoshta@tcd.ie or through LinkedIn: https://www.linkedin.com/in/tanmay-g");
-    }
   };
 
   return (
@@ -126,18 +111,20 @@ const Contact = () => {
               name='name'
               value={form.name}
               onChange={handleChange}
-              placeholder="What's your good name?"
+              required
+              placeholder="Your name"
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
             />
           </label>
           <label className='flex flex-col'>
-            <span className='text-white font-medium mb-4'>Your email</span>
+            <span className='text-white font-medium mb-4'>Your Email</span>
             <input
               type='email'
               name='email'
               value={form.email}
               onChange={handleChange}
-              placeholder="What's your web address?"
+              required
+              placeholder="your@email.com"
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
             />
           </label>
@@ -148,14 +135,15 @@ const Contact = () => {
               name='message'
               value={form.message}
               onChange={handleChange}
-              placeholder='What you want to say?'
+              required
+              placeholder="How can I help you?"
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
             />
           </label>
 
           <button
             type='submit'
-            className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary'
+            className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary hover:bg-[#1d1836] transition-colors duration-300'
           >
             {loading ? "Sending..." : "Send"}
           </button>
