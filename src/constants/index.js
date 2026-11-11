@@ -75,11 +75,11 @@ export const navLinks = [
   },
 ];
 
-// Headline numbers in the hero. Each one comes from the Actin Technologies work below.
+// Headline numbers in the hero.
 export const heroStats = [
-  { value: "60%", label: "Reduction in manual supervision and hazards" },
-  { value: "96%", label: "Meter reading accuracy with OCR" },
-  { value: "70%", label: "Less manual effort on invoice entry" },
+  { value: "1.5+", label: "Years shipping to production" },
+  { value: "1st", label: "Class MSc, Trinity College Dublin" },
+  { value: "9.12", label: "Bachelor's CGPA out of 10" },
 ];
 
 const services = [
