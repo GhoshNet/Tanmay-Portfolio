@@ -1,160 +1,107 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import { styles } from "../styles";
-import { navLinks } from "../constants";
-import { logo, menu, close } from "../assets";
+import { navLinks, RESUME_URL } from "../constants";
 import { trackResumeDownload, trackSocialClick } from "../utils/analytics";
 
+const LINKEDIN = "https://www.linkedin.com/in/tanmay-g/";
+
 const Navbar = () => {
-  const [active, setActive] = useState("");
-  const [toggle, setToggle] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      if (scrollTop > 100) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav
-      className={`${styles.paddingX
-        } w-full flex items-center py-5 fixed top-0 z-20 ${scrolled ? "bg-primary" : "bg-transparent"
-        }`}
-    >
-      <div className='w-full flex justify-between items-center max-w-7xl mx-auto'>
-        <Link
-          to='/'
-          className='flex items-center gap-2'
-          onClick={() => {
-            setActive("");
-            window.scrollTo(0, 0);
-          }}
+    <header className="fixed inset-x-0 top-0 z-30 border-b border-line bg-ink/85 backdrop-blur-md">
+      <div className={`${styles.wrap} flex h-14 items-center justify-between gap-4`}>
+        <a
+          data-l="text"
+          href="#top"
+          aria-label="Tanmay Ghosh, back to top"
+          className="font-display text-[26px] font-black leading-none tracking-[0.02em]"
         >
-          <img src={logo} alt='logo' className='w-9 h-9 object-contain' />
-          <p className='text-white text-[18px] font-bold cursor-pointer flex '>
-            Tanmay &nbsp;
-            <span className='sm:block hidden'>Ghosh</span>
-          </p>
-        </Link>
+          TG<span className="text-amber">.</span>
+        </a>
 
-        <ul className='list-none hidden sm:flex flex-row gap-10 items-center'>
+        <nav aria-label="Sections" className="hidden items-center gap-[clamp(14px,1.8vw,26px)] lg:flex">
           {navLinks.map((nav) => (
-            <li
+            <a
+              data-l="text"
               key={nav.id}
-              className={`${active === nav.title ? "text-white" : "text-secondary"
-                } hover:text-white text-[18px] font-medium cursor-pointer`}
-              onClick={() => setActive(nav.title)}
+              href={`#${nav.id}`}
+              className="font-mono text-[12px] font-medium uppercase tracking-[0.08em] text-mute transition-colors hover:text-bone"
             >
-              <a href={`#${nav.id}`}>{nav.title}</a>
-            </li>
+              {nav.title}
+            </a>
           ))}
+        </nav>
 
-          {/* Resume Download Button */}
-          <li>
-            <a
-              href="/resume.pdf"
-              download="Tanmay_Ghosh_Resume.pdf"
-              onClick={trackResumeDownload}
-              className="bg-[#915EFF] hover:bg-[#7c4ddb] text-white font-bold py-2 px-6 rounded-lg transition-all duration-300"
-            >
-              Resume
-            </a>
-          </li>
-
-          {/* LinkedIn Button */}
-          <li>
-            <a
-              href="https://www.linkedin.com/in/tanmay-g/"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => trackSocialClick('LinkedIn')}
-              className="bg-tertiary hover:bg-[#1d1836] text-white font-bold py-2 px-6 rounded-lg transition-all duration-300 border border-[#915EFF]"
-            >
-              LinkedIn
-            </a>
-          </li>
-        </ul>
-
-        <div className='sm:hidden flex flex-1 justify-end items-center'>
+        <div className="flex items-center gap-2">
+          <a
+            data-l
+            href={LINKEDIN}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackSocialClick("LinkedIn")}
+            className="hidden border border-line px-3 py-2 font-mono text-[11px] font-medium uppercase leading-none tracking-[0.08em] text-bone transition-colors hover:border-amber hover:text-amber sm:block"
+          >
+            LinkedIn
+          </a>
+          <a
+            data-l
+            href={RESUME_URL}
+            download="Tanmay_Ghosh_Resume.pdf"
+            onClick={trackResumeDownload}
+            className="border border-amber bg-amber px-3 py-2 font-mono text-[11px] font-medium uppercase leading-none tracking-[0.08em] text-ink"
+          >
+            Resume
+          </a>
           <button
+            data-l
             type="button"
-            aria-label={toggle ? "Close menu" : "Open menu"}
-            aria-expanded={toggle}
-            onClick={() => setToggle(!toggle)}
-            className="bg-transparent border-none p-0"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={() => setOpen(!open)}
+            className="flex h-[34px] w-[34px] flex-col items-center justify-center gap-[5px] border border-line lg:hidden"
           >
-            <img
-              src={toggle ? close : menu}
-              alt=''
-              className='w-[28px] h-[28px] object-contain'
-            />
+            <span className={`h-px w-4 bg-bone transition-transform ${open ? "translate-y-[3px] rotate-45" : ""}`} />
+            <span className={`h-px w-4 bg-bone transition-transform ${open ? "-translate-y-[3px] -rotate-45" : ""}`} />
           </button>
-
-          <div
-            className={`${!toggle ? "hidden" : "flex"
-              } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[140px] z-10 rounded-xl`}
-          >
-            <ul className='list-none flex justify-end items-start flex-1 flex-col gap-4'>
-              {navLinks.map((nav) => (
-                <li
-                  key={nav.id}
-                  className={`font-poppins font-medium cursor-pointer text-[16px] ${active === nav.title ? "text-white" : "text-secondary"
-                    }`}
-                  onClick={() => {
-                    setToggle(!toggle);
-                    setActive(nav.title);
-                  }}
-                >
-                  <a href={`#${nav.id}`}>{nav.title}</a>
-                </li>
-              ))}
-
-              {/* Resume Download Button - Mobile */}
-              <li className="w-full">
-                <a
-                  href="/resume.pdf"
-                  download="Tanmay_Ghosh_Resume.pdf"
-                  onClick={(e) => {
-                    trackResumeDownload();
-                    setToggle(false);
-                  }}
-                  className="bg-[#915EFF] hover:bg-[#7c4ddb] text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 block text-center"
-                >
-                  Resume
-                </a>
-              </li>
-
-              {/* LinkedIn Button - Mobile */}
-              <li className="w-full">
-                <a
-                  href="https://www.linkedin.com/in/tanmay-g/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => {
-                    trackSocialClick('LinkedIn');
-                    setToggle(false);
-                  }}
-                  className="bg-tertiary hover:bg-[#1d1836] text-white font-bold py-2 px-4 rounded-lg transition-all duration-300 border border-[#915EFF] block text-center"
-                >
-                  LinkedIn
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
-    </nav>
+
+      {open && (
+        <nav
+          id="mobile-menu"
+          aria-label="Sections"
+          className="border-t border-line bg-ink lg:hidden"
+        >
+          <div className={`${styles.wrap} flex flex-col py-2`}>
+            {navLinks.map((nav) => (
+              <a
+                key={nav.id}
+                href={`#${nav.id}`}
+                onClick={() => setOpen(false)}
+                className="border-b border-line py-4 font-mono text-[13px] uppercase tracking-[0.08em] text-bone last:border-b-0"
+              >
+                {nav.title}
+              </a>
+            ))}
+            <a
+              href={LINKEDIN}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                trackSocialClick("LinkedIn");
+                setOpen(false);
+              }}
+              className="py-4 font-mono text-[13px] uppercase tracking-[0.08em] text-amber sm:hidden"
+            >
+              LinkedIn ↗
+            </a>
+          </div>
+        </nav>
+      )}
+    </header>
   );
 };
 

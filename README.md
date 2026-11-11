@@ -1,13 +1,13 @@
 # Tanmay Ghosh - Portfolio Website
 
-A modern, interactive portfolio website showcasing AI/ML projects, professional experience, and technical skills. Built with React, Three.js, and cutting-edge web technologies.
+A modern, interactive portfolio website showcasing AI/ML projects, professional experience, and technical skills. Built with React, Vite and Tailwind CSS.
 
 ![Portfolio Preview](./preview.png)
 
 ## 🌟 Features
 
-- **3D Interactive Elements**: Engaging 3D models powered by Three.js and React Three Fiber
-- **Smooth Animations**: GSAP and Framer Motion for fluid, professional animations
+- **Agent-Build Reveal**: On the first visit of a session, a team of cursors assembles the page layer by layer (see below)
+- **Light Motion**: Sections fade in on scroll; no animation library
 - **Responsive Design**: Fully responsive across all devices and screen sizes
 - **SEO Optimized**: Comprehensive meta tags for better search engine visibility
 - **Analytics Integration**: Google Analytics 4 for tracking user engagement
@@ -25,19 +25,28 @@ Visit the live portfolio: [ghoshnet.github.io/Tanmay-Portfolio](https://ghoshnet
 - **Vite** (v4.1.0) - Build tool and dev server
 - **TailwindCSS** (v3.2.6) - Utility-first CSS framework
 
-### 3D & Animations
-- **Three.js** (v0.172.0) - 3D graphics library
-- **React Three Fiber** (v8.11.1) - React renderer for Three.js
-- **React Three Drei** (v9.56.24) - Useful helpers for R3F
-- **GSAP** (v3.12.7) - Professional-grade animation
-- **Framer Motion** (v9.0.7) - React animation library
+### Animation
+- **Agent-build reveal** - custom, dependency-free (`src/agentBuild/`)
 
 ### Other Libraries
 - **EmailJS** (v3.10.0) - Email service integration
-- **React Router DOM** (v6.8.1) - Client-side routing
 - **React Icons** (v5.4.0) - Icon library
-- **React Tilt** (v1.0.2) - Tilt effect for cards
-- **React Vertical Timeline** (v3.6.0) - Timeline component
+
+## 🤖 Agent-Build Reveal
+
+On the first page load of a browser session, coloured "agent" cursors draw each
+element with a selection box, size readout and guide lines while the page tours
+itself, then return to the top.
+
+- **Skip**: scrolling, touching, any key, or the Skip button ends it at once.
+- **Replay**: the "Replay the build" button in the footer.
+- **Reduced motion**: visitors with that system setting never see it.
+- **Add an element**: give it a `data-l` attribute (`data-l="text"` for text that
+  should wipe in). Elements without it simply appear with their parent.
+- **Tune it**: agent count and timings are the `T` object at the top of
+  `src/agentBuild/engine.js`.
+- **Turn it off**: remove `<AgentBuild />` from `src/App.jsx` and the small inline
+  script in `index.html`.
 
 ## 📦 Installation
 
@@ -133,7 +142,8 @@ portfolio/
 │   ├── resume.pdf          # Your resume file
 │   └── ...                 # Other public assets
 ├── src/
-│   ├── assets/             # Images, icons, 3D models
+│   ├── assets/             # Images and icons
+│   ├── agentBuild/         # Agent-build reveal (engine, styles, React wrapper)
 │   ├── components/         # React components
 │   │   ├── About.jsx
 │   │   ├── Beyond.jsx
@@ -143,11 +153,10 @@ portfolio/
 │   │   ├── Feedbacks.jsx
 │   │   ├── Footer.jsx
 │   │   ├── Hero.jsx
-│   │   ├── Loader.jsx
 │   │   ├── Navbar.jsx
 │   │   ├── Tech.jsx
 │   │   ├── Works.jsx
-│   │   └── canvas/         # 3D canvas components
+│   │   └── ui.jsx          # Shared section heading and timeline row
 │   ├── constants/          # Data and constants
 │   │   └── index.js
 │   ├── hoc/                # Higher-order components
@@ -264,10 +273,9 @@ VITE_APP_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 
 ## 🐛 Troubleshooting
 
-### 3D Models Not Loading
-- Ensure Three.js dependencies are installed
-- Check browser console for errors
-- Try clearing cache and rebuilding
+### Build Animation Not Playing
+- It runs once per browser session: open a new tab or use "Replay the build" in the footer
+- It is disabled when the system "reduce motion" setting is on
 
 ### Contact Form Not Working
 - Verify EmailJS credentials in `.env`
@@ -296,9 +304,6 @@ Contributions, issues, and feature requests are welcome!
 
 ## 🙏 Acknowledgments
 
-- Three.js community for amazing 3D resources
-- React Three Fiber for seamless React integration
-- GSAP for professional animations
 - All open-source contributors
 
 ---

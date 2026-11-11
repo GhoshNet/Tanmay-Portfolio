@@ -1,16 +1,24 @@
-import { BrowserRouter } from "react-router-dom";
-
-import { About, Contact, Experience, Feedbacks, Hero, Navbar, Tech, Works, Certifications, Beyond, Publications, StarsCanvas } from "./components";
-import Footer from "./components/Footer";
+import {
+  About,
+  Beyond,
+  Certifications,
+  Contact,
+  Experience,
+  Footer,
+  Hero,
+  Navbar,
+  Publications,
+  Tech,
+  Works,
+} from "./components";
+import AgentBuild from "./agentBuild/AgentBuild";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <div className='relative z-0 bg-primary'>
-        <div className='bg-hero-pattern bg-cover bg-no-repeat bg-center'>
-          <Navbar />
-          <Hero />
-        </div>
+    <>
+      <Navbar />
+      <main id="top">
+        <Hero />
         <About />
         <Experience />
         <Tech />
@@ -18,16 +26,12 @@ const App = () => {
         <Publications />
         <Certifications />
         <Beyond />
-        {/* <Feedbacks /> — Uncomment when real testimonials are available */}
-        <div className='relative z-0'>
-          <Contact />
-
-          <StarsCanvas />
-          <Footer/>
-        </div>
-      </div>
-    </BrowserRouter>
+        <Contact />
+      </main>
+      <Footer />
+      <AgentBuild />
+    </>
   );
-}
+};
 
 export default App;

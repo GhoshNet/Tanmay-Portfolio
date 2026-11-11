@@ -1,21 +1,8 @@
 
 import {
-  logo,
-  backend,
-  creator,
-  mobile,
-  web,
-  github,
-  menu,
-  close,
-  css,
-  gearXpert,
   project2,
-  project3,
   mysql,
-  express,
   aws,
-  mui,
   SafeAct,
   MovieRecommendation,
   InvoiceProcessing,
@@ -24,20 +11,12 @@ import {
   criminal,
   langchain,
   gsap,
-  framer,
-  figma,
   git,
-  html,
   javascript,
   mongodb,
   nodejs,
   reactjs,
-  redux,
-  tailwind,
   threejs,
-  firstTestimonial,
-  secondTestimonial,
-  thirdTestimonial,
   python,
   YOLO,
   openCV,
@@ -47,7 +26,7 @@ import {
   tensorflow,
   docker,
   huggingface,
-} from '../assets'
+} from "../assets";
 
 
 // Import Company Logos separately
@@ -60,17 +39,21 @@ import constellation from "../assets/company/com_constellation_logo_01.png";
 import tcdLogo from "../assets/company/tcd_logo.png";
 import mmcoeLogo from "../assets/company/mmcoe_logo.png";
 
+// Files in /public are served under the site's base path (/Tanmay-Portfolio/ on GitHub Pages).
+export const RESUME_URL = `${import.meta.env.BASE_URL}resume.pdf`;
+
 export const navLinks = [
-
-
   {
     id: "about",
     title: "About",
-
   },
   {
     id: "work",
     title: "Experiences",
+  },
+  {
+    id: "projects",
+    title: "Projects",
   },
   {
     id: "publications",
@@ -90,22 +73,25 @@ export const navLinks = [
   },
 ];
 
+// Headline numbers in the hero. Each one comes from the Actin Technologies work below.
+export const heroStats = [
+  { value: "60%", label: "Reduction in manual supervision and hazards" },
+  { value: "96%", label: "Meter reading accuracy with OCR" },
+  { value: "70%", label: "Less manual effort on invoice entry" },
+];
+
 const services = [
   {
     title: "AI/ML Engineer",
-    icon: creator,
   },
   {
     title: "Computer Vision Specialist",
-    icon: mobile,
   },
   {
     title: "Full-Stack Developer",
-    icon: web,
   },
   {
     title: "Backend Developer",
-    icon: backend,
   },
 ];
 
@@ -201,7 +187,7 @@ const experiences = [
     iconBg: "#ffffff",
     date: "Sept 2025 – August 2026",
     points: [
-      "Pursuing a Master's in Computer Science with specialisation in Intelligent Systems at one of Europe's leading research universities, Dublin, Ireland.",
+      "Completed a Master's in Computer Science with specialisation in Intelligent Systems at one of Europe's leading research universities, Dublin, Ireland.",
       "Coursework: Advanced Software Engineering, Distributed Systems, Information Retrieval, AI/ML, Knowledge and Data Engineering, Data Visualization, Text Analytics, Statistical Modelling, and Adaptive Applications.",
       "Active member of Trinity College's Boxing Club and Rifle Club.",
     ],

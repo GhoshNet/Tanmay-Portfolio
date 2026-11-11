@@ -1,71 +1,66 @@
-import { motion } from "framer-motion";
-
 import { styles } from "../styles";
-import { ComputersCanvas } from "./canvas";
+import { heroStats, RESUME_URL } from "../constants";
 import { trackResumeDownload } from "../utils/analytics";
 
 const Hero = () => {
-
   return (
-    <section className={`relative w-full h-screen mx-auto`}>
+    <div className="relative overflow-hidden border-b border-line pb-[clamp(48px,7vw,90px)] pt-[calc(56px+clamp(48px,9vw,110px))]">
+      {/* Oversized outline word behind the headline */}
       <div
-        className={`absolute inset-0 top-[120px] max-w-7xl mx-auto ${styles.paddingX} flex flex-row items-start gap-5`}
+        data-l="text"
+        aria-hidden="true"
+        className="pointer-events-none absolute right-[-2vw] top-1/2 -translate-y-[46%] select-none whitespace-nowrap font-display text-[clamp(150px,36vw,480px)] font-black leading-[0.8] tracking-[-0.02em] text-transparent [-webkit-text-stroke:1px_#24353c]"
       >
-        <div className='flex flex-col justify-center items-center mt-28 md:mt-5 lg:mt-5'>
-          <div className='w-5 h-5 rounded-full bg-[#915EFF]' />
-          <div className='w-1 sm:h-80 h-40 violet-gradient' />
-        </div>
+        AI/ML
+      </div>
 
-        <div className="mt-28 md:mt-5 lg:mt-5">
-          <h1 className={`${styles.heroHeadText} text-white`}>
-            Hi, I'm <span className='text-[#915EFF]'>Tanmay Ghosh</span>
+      <div className={`${styles.wrap} relative grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_auto]`}>
+        <div>
+          <p data-l="text" className={styles.eyebrow}>
+            AI/ML Engineer · Dublin, Ireland
+          </p>
+          <p data-l="text" className="mt-6 w-fit text-[clamp(18px,2.4vw,26px)] italic leading-tight text-mute">
+            Hi, I'm
+          </p>
+          <h1 className="mt-1.5 font-display text-[clamp(64px,13.5vw,176px)] font-black uppercase leading-[0.86] tracking-[-0.01em]">
+            <span data-l="text" className="block w-fit">Tanmay</span>
+            <span data-l="text" className="block w-fit text-amber">Ghosh.</span>
           </h1>
-          <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-            AI/ML Engineer & Computer Science Master's Student<br className='sm:block hidden' />
-            at Trinity College Dublin, specializing in intelligent<br className='sm:block hidden' />
-            systems, computer vision, and scalable AI solutions.
+          <p data-l="text" className="mt-7 max-w-[56ch] text-[clamp(16px,1.5vw,18px)] leading-[1.65] text-bone">
+            AI/ML Engineer with an MSc in Computer Science from Trinity College Dublin,
+            specialising in intelligent systems, computer vision, and scalable AI solutions.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-wrap gap-3">
             <a
-              href="/resume.pdf"
+              data-l
+              href={RESUME_URL}
               download="Tanmay_Ghosh_Resume.pdf"
               onClick={trackResumeDownload}
-              className="bg-[#915EFF] hover:bg-[#7c4ddb] text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-[#915EFF]/25 hover:-translate-y-0.5"
+              className={`${styles.btn} ${styles.btnSolid}`}
             >
-              Download Resume
+              Download Resume <span aria-hidden="true">↓</span>
             </a>
-            <a
-              href="#work"
-              className="border-2 border-[#915EFF] text-white font-bold py-3 px-8 rounded-xl transition-all duration-300 hover:bg-[#915EFF]/10 hover:-translate-y-0.5"
-            >
+            <a data-l href="#projects" className={`${styles.btn} ${styles.btnGhost}`}>
               View Projects
             </a>
           </div>
         </div>
-      </div>
 
-      <ComputersCanvas />
-
-      <div className='absolute xs:bottom-10 bottom-32 w-full flex justify-center items-center'>
-        <a href='#about' aria-label="Scroll down to About section">
-          <div className='w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2'>
-            <motion.div
-              animate={{
-                y: [0, 24, 0],
-              }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: "loop",
-              }}
-              className='w-3 h-3 rounded-full bg-secondary mb-1'
-            />
-          </div>
-        </a>
+        <dl className="grid grid-cols-2 gap-x-7 gap-y-6 pb-1.5 xs:grid-cols-3 lg:grid-cols-1">
+          {heroStats.map((stat) => (
+            <div data-l key={stat.value} className="grid gap-1.5 lg:grid-cols-[auto_1fr] lg:items-baseline lg:gap-3.5">
+              <dt className="order-2 max-w-[17ch] font-mono text-[11px] uppercase leading-[1.45] tracking-[0.08em] text-mute">
+                {stat.label}
+              </dt>
+              <dd className="order-1 font-display text-[clamp(40px,5vw,60px)] font-black leading-[0.9] text-amber [font-variant-numeric:tabular-nums]">
+                {stat.value}
+              </dd>
+            </div>
+          ))}
+        </dl>
       </div>
-    </section>
+    </div>
   );
 };
 

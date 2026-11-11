@@ -1,25 +1,45 @@
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 
 import { styles } from "../styles";
-import { staggerContainer } from "../utils/motion";
 
-const StarWrapper = (Component, idName) =>
+/**
+ * Wraps a section component in the shared page frame: an anchor id for the
+ * nav, a bottom rule, the centred column, and a one-time fade-up on scroll.
+ */
+const SectionWrapper = (Component, idName) =>
   function HOC() {
-    return (
-      <motion.section
-        variants={staggerContainer()}
-        initial='hidden'
-        whileInView='show'
-        viewport={{ once: true, amount: 0.25 }}
-        className={`${styles.padding} max-w-7xl mx-auto relative z-0`}
-      >
-        <span className='hash-span' id={idName}>
-          &nbsp;
-        </span>
+    const ref = useRef(null);
 
-        <Component />
-      </motion.section>
+    useEffect(() => {
+      const el = ref.current;
+      if (!el) return;
+      if (!("IntersectionObserver" in window)) {
+        el.classList.add("in");
+        return;
+      }
+      const io = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            el.classList.add("in");
+            io.disconnect();
+          }
+        },
+        { threshold: 0.08 }
+      );
+      io.observe(el);
+      return () => io.disconnect();
+    }, []);
+
+    return (
+      <section
+        id={idName || undefined}
+        className="scroll-mt-14 border-b border-line py-[clamp(56px,8vw,104px)]"
+      >
+        <div ref={ref} className={`reveal ${styles.wrap}`}>
+          <Component />
+        </div>
+      </section>
     );
   };
 
-export default StarWrapper;
+export default SectionWrapper;

@@ -1,96 +1,46 @@
-import React, { useRef, useEffect } from "react";
-import { Tilt } from "react-tilt";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-import { styles } from "../styles";
 import { services } from "../constants";
 import { SectionWrapper } from "../hoc";
+import { SectionHead } from "./ui";
 
-gsap.registerPlugin(ScrollTrigger);
-
-const useGsap = (elementRef, animation, delay = 0) => {
-  useEffect(() => {
-    if (elementRef.current) {
-      gsap.fromTo(
-        elementRef.current,
-        animation.from,
-        {
-          ...animation.to,
-          delay,
-          scrollTrigger: {
-            trigger: elementRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-        }
-      );
-    }
-  }, [elementRef, animation, delay]);
-};
-
-const ServiceCard = ({ index, title, icon }) => {
-  const cardRef = useRef(null);
-  useGsap(cardRef, {
-    from: { opacity: 0, y: 100, scale: 0.8 },
-    to: { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power3.out" },
-  }, index * 0.2);
-
-  return (
-    <Tilt className="xs:w-[250px] w-full">
-      <div ref={cardRef} className="w-full green-pink-gradient p-[1px] rounded-[20px] shadow-card">
-        <div className="bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col">
-          <img src={icon} alt={title} className="w-16 h-16 object-contain" />
-          <h3 className="text-white text-[20px] font-bold text-center">{title}</h3>
-        </div>
-      </div>
-    </Tilt>
-  );
-};
+const Strong = ({ children }) => <span className="font-medium text-bone">{children}</span>;
 
 const About = () => {
-  const headingRef = useRef(null);
-  const paragraphRef = useRef(null);
-
-  // Heading Animation
-  useGsap(headingRef, {
-    from: { opacity: 0, x: -50 },
-    to: { opacity: 1, x: 0, duration: 1, ease: "power2.out" },
-  });
-
-  // Paragraph Animation
-  useGsap(paragraphRef, {
-    from: { opacity: 0, y: 50 },
-    to: { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" },
-  }, 0.3);
-
   return (
     <>
-      <div ref={headingRef}>
-        <p className={styles.sectionSubText}>Introduction</p>
-        <h2 className={styles.sectionHeadText}>Overview.</h2>
-      </div>
+      <SectionHead n="01" label="Introduction" title="Overview" />
 
-      <div ref={paragraphRef} className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px] space-y-4">
-        <p>
-          I'm a Computer Science postgraduate at <span className="text-white font-semibold">Trinity College Dublin</span>, specializing in <span className="text-white font-semibold">Intelligent Systems</span> with a focus on AI, Data Science, Knowledge Graphs, and Advanced Software Engineering.
-        </p>
-        <p>
-          With 2+ years of professional experience, I've built production-grade AI/ML solutions that deliver measurable impact—from computer vision systems reducing workplace hazards by 60% to RAG-based platforms cutting response times by 40%.
-        </p>
-        <p>
-          My expertise spans <span className="text-white font-semibold">YOLO-based vision models, LLMs, FastAPI backends, and React frontends</span>. I specialize in transforming complex AI research into scalable, real-world applications that solve business problems and optimize operations.
-        </p>
-        <p>
-          Let's collaborate to build intelligent systems that make a difference.
-        </p>
-      </div>
+      <div className="grid gap-x-16 gap-y-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
+        <div className="max-w-[66ch] space-y-5 text-[17px] leading-[1.75] text-mute">
+          <p data-l="text">
+            I'm a Computer Science postgraduate at <Strong>Trinity College Dublin</Strong>, specializing in <Strong>Intelligent Systems</Strong> with a focus on AI, Data Science, Knowledge Graphs, and Advanced Software Engineering.
+          </p>
+          <p data-l="text">
+            With 2+ years of professional experience, I've built production-grade AI/ML solutions that deliver measurable impact—from computer vision systems reducing workplace hazards by 60% to RAG-based platforms cutting response times by 40%.
+          </p>
+          <p data-l="text">
+            My expertise spans <Strong>YOLO-based vision models, LLMs, FastAPI backends, and React frontends</Strong>. I specialize in transforming complex AI research into scalable, real-world applications that solve business problems and optimize operations.
+          </p>
+          <p data-l="text">
+            Let's collaborate to build intelligent systems that make a difference.
+          </p>
+        </div>
 
-
-      <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 justify-items-center gap-10">
-        {services.map((service, index) => (
-          <ServiceCard key={service.title} index={index} {...service} />
-        ))}
+        <ol className="self-start border-t border-line">
+          {services.map((service, index) => (
+            <li
+              data-l
+              key={service.title}
+              className="flex items-baseline gap-5 border-b border-line py-5"
+            >
+              <span className="font-mono text-[12px] font-medium text-amber">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span className="font-display text-[clamp(24px,2.6vw,30px)] font-bold uppercase leading-none tracking-[0.01em]">
+                {service.title}
+              </span>
+            </li>
+          ))}
+        </ol>
       </div>
     </>
   );

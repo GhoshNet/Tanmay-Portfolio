@@ -1,174 +1,85 @@
-import React, { useEffect, useRef } from "react";
-import { Tilt } from "react-tilt";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaLock } from "react-icons/fa6";
 
 import { styles } from "../styles";
-import { github } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { projects } from "../constants";
 import { trackProjectClick } from "../utils/analytics";
+import { SectionHead } from "./ui";
 
-// Register ScrollTrigger plugin
-gsap.registerPlugin(ScrollTrigger);
+const GITHUB_PROFILE = "https://github.com/GhoshNet";
 
-const ProjectCard = ({
-  index,
-  name,
-  description,
-  tags,
-  image,
-  source_code_link,
-  isEnterprise,
-}) => {
-  const cardRef = useRef(null);
-
-  useEffect(() => {
-    const el = cardRef.current;
-
-    // ScrollTrigger for animating project cards with stagger
-    gsap.fromTo(
-      el,
-      {
-        opacity: 0,
-        y: 100, // Start off-screen
-      },
-      {
-        opacity: 1,
-        y: 0,
-        scrollTrigger: {
-          trigger: el,
-          start: "top bottom",  // Trigger when the top of the element hits the bottom of the viewport
-          end: "top center",    // End when the top reaches the center of the viewport
-          scrub: true,          // Smoothly sync scroll and animation
-          markers: false,       // Set to `true` to see debug markers
-        },
-      }
-    );
-  }, []);
+const ProjectCard = ({ index, name, description, tags, image, source_code_link, isEnterprise }) => {
+  // Enterprise work has no public repo, so its link goes to the GitHub profile.
+  const hasRepo = source_code_link.replace(/\/$/, "") !== GITHUB_PROFILE;
 
   return (
-    <div ref={cardRef}>
-      <Tilt
-        options={{
-          max: 45,
-          scale: 1,
-          speed: 450,
-        }}
-        className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full"
-      >
-        <div className="relative w-full h-[230px]">
-          <img
-            src={image}
-            alt={`${name} project screenshot`}
-            className="w-full h-full object-cover object-left rounded-2xl"
-          />
+    <article
+      data-l
+      className={`${styles.card} group flex flex-col transition-[border-color,transform] duration-200 hover:-translate-y-1 hover:border-amber`}
+    >
+      <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-ink">
+        <img
+          src={image}
+          alt={`${name} project screenshot`}
+          loading="lazy"
+          className="h-full w-full object-cover object-left opacity-90 transition-[opacity,transform] duration-300 group-hover:scale-[1.03] group-hover:opacity-100"
+        />
+        {isEnterprise && (
+          <span
+            className="absolute right-3 top-3 flex items-center gap-1.5 bg-ink/85 px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.08em] text-bone backdrop-blur-sm"
+            title="Enterprise / Private Project"
+          >
+            <FaLock className="text-[9px] text-amber" aria-hidden="true" />
+            Enterprise
+          </span>
+        )}
+      </div>
 
-          <div className="absolute inset-0 flex justify-end m-3 card-img_hover gap-2">
-            {/* Enterprise / Private badge */}
-            {isEnterprise && (
-              <div
-                className="bg-black/70 backdrop-blur-sm w-auto h-8 px-3 rounded-full flex items-center gap-1.5 pointer-events-none"
-                title="Enterprise / Private Project"
-              >
-                <FaLock className="text-[#915EFF] text-[10px]" />
-                <span className="text-white text-[10px] font-medium">Enterprise</span>
-              </div>
-            )}
-
-            {/* GitHub link */}
-            <div
-              onClick={() => {
-                trackProjectClick(name);
-                window.open(source_code_link, "_blank");
-              }}
-              className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
-              role="button"
-              tabIndex={0}
-              aria-label={`View ${name} source code on GitHub`}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  trackProjectClick(name);
-                  window.open(source_code_link, "_blank");
-                }
-              }}
-            >
-              <img
-                src={github}
-                alt="source code"
-                className="w-1/2 h-1/2 object-contain"
-              />
-            </div>
-          </div>
+      <div className="flex flex-1 flex-col gap-3.5 p-5">
+        <div className={`flex justify-between ${styles.label}`}>
+          <span className="text-amber">{String(index + 1).padStart(2, "0")}</span>
+          <span>{isEnterprise ? "Enterprise / Private" : "Personal / Academic"}</span>
         </div>
-
-        <div className="mt-5">
-          <h3 className="text-white font-bold text-[24px]">{name}</h3>
-          <p className="mt-2 text-secondary text-[14px]">{description}</p>
-        </div>
-
-        <div className="mt-4 flex flex-wrap gap-2">
+        <h3 data-l="text" className={`${styles.h3} w-fit text-[28px] [text-wrap:balance]`}>{name}</h3>
+        <p className="flex-1 text-[14.5px] leading-[1.65] text-mute">{description}</p>
+        <ul className="flex flex-wrap gap-1.5">
           {tags.map((tag) => (
-            <p
-              key={`${name}-${tag.name}`}
-              className={`text-[14px] ${tag.color}`}
-            >
-              #{tag.name}
-            </p>
+            <li key={`${name}-${tag.name}`} className={styles.chip}>
+              {tag.name}
+            </li>
           ))}
-        </div>
-      </Tilt>
-    </div>
+        </ul>
+        <a
+          href={source_code_link}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => trackProjectClick(name)}
+          aria-label={hasRepo ? `View ${name} source code on GitHub` : `${name}: view GitHub profile`}
+          className={styles.link}
+        >
+          {hasRepo ? "Source code" : "GitHub profile"} <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
   );
 };
 
 const Works = () => {
-  useEffect(() => {
-    // Stagger effect for project cards
-    gsap.fromTo(
-      ".project-card", // Select all project cards
-      {
-        opacity: 0,
-        y: 100,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        stagger: 0.1, // Stagger delay of 0.3 seconds between each card
-        scrollTrigger: {
-          trigger: ".works-container",
-          start: "top bottom",  // Trigger when the top of the container reaches the bottom
-          end: "top center",
-          scrub: true,
-          markers: false, // Set to true to see debug markers
-        },
-      }
-    );
-  }, []);
-
   return (
     <>
-      <div>
-        <p className={`${styles.sectionSubText}`}>My work</p>
-        <h2 className={`${styles.sectionHeadText}`}>Projects.</h2>
-      </div>
-
-      <div className="w-full flex">
-        <p className="mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]">
+      <SectionHead n="04" label="My work" title="Projects">
+        <p data-l="text" className={`${styles.lede} mt-6`}>
           The following projects showcase real-world AI/ML systems I've built — from computer vision pipelines to LLM-powered platforms. Enterprise projects are marked accordingly, while personal and academic projects include direct links to source code.
         </p>
-      </div>
+      </SectionHead>
 
-      <div className="works-container mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center gap-5">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, index) => (
-          <div key={`project-${index}`} className="project-card">
-            <ProjectCard index={index} {...project} />
-          </div>
+          <ProjectCard key={project.name} index={index} {...project} />
         ))}
       </div>
     </>
   );
 };
 
-export default SectionWrapper(Works, "");
+export default SectionWrapper(Works, "projects");

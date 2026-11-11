@@ -1,65 +1,43 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { FaBookOpen, FaArrowUpRightFromSquare } from "react-icons/fa6";
-
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
-import { fadeIn, textVariant } from "../utils/motion";
 import { publications } from "../constants";
+import { SectionHead } from "./ui";
 
-const PublicationCard = ({ index, title, subtitle, journal, year, role, description, link }) => (
-  <motion.div
-    variants={fadeIn("up", "spring", index * 0.15, 0.75)}
-    className="bg-tertiary p-6 rounded-2xl w-full shadow-card"
+const PublicationCard = ({ title, subtitle, journal, year, role, description, link }) => (
+  <article
+    data-l
+    className={`${styles.card} grid gap-x-10 gap-y-5 p-[clamp(20px,3vw,32px)] md:grid-cols-[minmax(0,1fr)_auto]`}
   >
-    <div className="flex items-start gap-4">
-      <div className="text-[#915EFF] text-3xl mt-1 shrink-0">
-        <FaBookOpen />
-      </div>
-      <div className="flex-1">
-        <h3 className="text-white font-bold text-[20px] leading-snug">{title}</h3>
-        {subtitle && (
-          <p className="text-[#915EFF] text-[14px] mt-1 font-medium italic">{subtitle}</p>
-        )}
-        <div className="flex items-center gap-3 mt-2 flex-wrap">
-          <span className="text-secondary text-[13px]">{journal}</span>
-          <span className="text-secondary text-[12px] bg-black-100 px-2 py-[2px] rounded-full">{year}</span>
-          <span className="text-secondary text-[12px] bg-black-100 px-2 py-[2px] rounded-full">{role}</span>
-        </div>
-        <p className="text-secondary text-[14px] mt-3 leading-[22px]">{description}</p>
-        {link && (
-          <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mt-4 text-[#915EFF] hover:text-white transition-colors duration-300 text-[14px] font-medium"
-          >
-            Read Paper <FaArrowUpRightFromSquare className="text-[12px]" />
-          </a>
-        )}
-      </div>
+    <div>
+      <p className={styles.label}>{journal}</p>
+      <h3 className={`${styles.h3} mt-3 text-[clamp(26px,3.4vw,38px)] [text-wrap:balance]`}>{title}</h3>
+      {subtitle && <p className="mt-3 text-[15px] italic text-amber">{subtitle}</p>}
+      <p className="mt-4 max-w-[70ch] text-[15px] leading-[1.7] text-mute">{description}</p>
+      {link && (
+        <a href={link} target="_blank" rel="noopener noreferrer" className={`${styles.link} mt-5 inline-block`}>
+          Read Paper <span aria-hidden="true">↗</span>
+        </a>
+      )}
     </div>
-  </motion.div>
+    <div className="flex flex-wrap content-start gap-1.5 md:flex-col md:items-end">
+      <span className="font-display text-[44px] font-black leading-[0.9] text-amber">{year}</span>
+      <span className={styles.chip}>{role}</span>
+    </div>
+  </article>
 );
 
 const Publications = () => {
   return (
     <>
-      <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>Research & Writing</p>
-        <h2 className={styles.sectionHeadText}>Publications.</h2>
-      </motion.div>
+      <SectionHead n="05" label="Research & Writing" title="Publications">
+        <p data-l="text" className={`${styles.lede} mt-6`}>
+          Peer-reviewed research contributions in AI and machine learning.
+        </p>
+      </SectionHead>
 
-      <motion.p
-        variants={fadeIn("", "", 0.1, 1)}
-        className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
-      >
-        Peer-reviewed research contributions in AI and machine learning.
-      </motion.p>
-
-      <div className="mt-10 flex flex-col gap-6">
-        {publications.map((pub, index) => (
-          <PublicationCard key={pub.title} index={index} {...pub} />
+      <div className="flex flex-col gap-4">
+        {publications.map((pub) => (
+          <PublicationCard key={pub.title} {...pub} />
         ))}
       </div>
     </>

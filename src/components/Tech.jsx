@@ -1,64 +1,35 @@
-import React, { useEffect } from "react";
-import { motion } from "framer-motion";
-import { SectionWrapper } from "../hoc";
 import { technologies } from "../constants";
-import { styles } from "../styles";
-import { textVariant } from "../utils/motion";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { SectionWrapper } from "../hoc";
+import { SectionHead } from "./ui";
 
 const Tech = () => {
-  useEffect(() => {
-    gsap.fromTo(
-      ".tech-icon",  
-      {
-        opacity: 0,
-        y: 80
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 2.5,
-        stagger: 0.1, 
-        scrollTrigger: {
-          trigger: ".tech-icons-wrapper", 
-          start: "top 80%", 
-          end: "bottom 70%", 
-          scrub: true, 
-        },
-      }
-    );
-  }, []);
-
   return (
-    <section>
-      <motion.div variants={textVariant()}>
-        <p className={styles.sectionSubText}>What I work with</p>
-        <h2 className={styles.sectionHeadText}>Technologies.</h2>
-      </motion.div>
+    <>
+      <SectionHead n="03" label="What I work with" title="Technologies" />
 
-      <div className="tech-icons-wrapper mt-10 flex flex-row flex-wrap justify-center gap-10">
+      <ul className="grid grid-cols-2 gap-2 xs:grid-cols-[repeat(auto-fill,minmax(168px,1fr))]">
         {technologies.map((technology) => (
-          <div
-            className="w-28 h-28 group relative"
+          <li
+            data-l
             key={technology.name}
-            title={technology.name}
+            className="flex items-center gap-3 border border-line bg-panel p-2.5 transition-colors hover:border-amber"
           >
-            <img
-              src={technology.icon}
-              alt={technology.name}
-              className="tech-icon w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
-            />
-            <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-secondary text-[12px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center bg-bone p-1.5">
+              <img
+                src={technology.icon}
+                alt=""
+                loading="lazy"
+                className="max-h-full max-w-full object-contain"
+              />
+            </span>
+            <span className="font-mono text-[12px] tracking-[0.04em] text-bone">
               {technology.name}
             </span>
-          </div>
+          </li>
         ))}
-      </div>
-    </section>
+      </ul>
+    </>
   );
 };
 
-export default SectionWrapper(Tech, "");
+export default SectionWrapper(Tech, "tech");

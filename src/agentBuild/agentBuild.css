@@ -1,0 +1,201 @@
+/* Overlay styles for the agent-build reveal (see engine.js). */
+
+/* Before React mounts: keep the page blank so the build starts from nothing.
+   The `pre` class is set by a small inline script in index.html. */
+html.pre #root {
+  opacity: 0;
+}
+
+html.building {
+  scroll-behavior: auto;
+}
+html.building [data-l]:not(.on) {
+  opacity: 0;
+}
+html.building [data-l] {
+  transition: none !important;
+}
+/* Section fade-ins would fight the build, so they are held open while it runs. */
+html.building .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+#rig-doc {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 40;
+  --rig: #4cc2ff;
+}
+#rig-fix {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  transition: opacity 0.5s;
+  --rig: #4cc2ff;
+  --rig-line: #24353c;
+}
+
+.sel {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 1px solid var(--rig);
+  background: rgba(76, 194, 255, 0.14);
+  transition-property: width, height, opacity;
+  transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.sel.box {
+  background: rgba(86, 128, 150, 0.42);
+}
+.sel i {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #fff;
+  border: 1px solid var(--rig);
+}
+.sel i:nth-child(1) { left: -4px; top: -4px; }
+.sel i:nth-child(2) { right: -4px; top: -4px; }
+.sel i:nth-child(3) { left: -4px; bottom: -4px; }
+.sel i:nth-child(4) { right: -4px; bottom: -4px; }
+.sel b {
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 6px);
+  transform: translateX(-50%);
+  padding: 3px 5px;
+  border-radius: 2px;
+  background: var(--rig);
+  color: #04202e;
+  font: 500 10px/1 "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  white-space: nowrap;
+}
+
+.guide {
+  position: absolute;
+  background: var(--rig);
+  opacity: 0.45;
+  transition: opacity 0.9s;
+}
+.guide.h { left: 0; right: 0; height: 1px; }
+.guide.v { width: 1px; }
+
+.cur {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  margin: -2px 0 0 -3px;
+  transition-property: transform, opacity;
+  transition-timing-function: cubic-bezier(0.3, 0.7, 0.2, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  will-change: transform;
+}
+
+.ruler {
+  position: absolute;
+  background-color: #0e181c;
+  opacity: 0.92;
+}
+.ruler.t {
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 12px;
+  border-bottom: 1px solid var(--rig-line);
+  background-image: repeating-linear-gradient(90deg, var(--rig) 0 1px, transparent 1px 100px),
+    repeating-linear-gradient(90deg, #3b5560 0 1px, transparent 1px 10px);
+  background-size: 100px 100%, 10px 5px;
+  background-repeat: repeat-x;
+  background-position: 0 0, 0 100%;
+}
+.ruler.l {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 12px;
+  border-right: 1px solid var(--rig-line);
+  background-image: repeating-linear-gradient(0deg, var(--rig) 0 1px, transparent 1px 100px),
+    repeating-linear-gradient(0deg, #3b5560 0 1px, transparent 1px 10px);
+  background-size: 100% 100px, 5px 10px;
+  background-repeat: repeat-y;
+  background-position: 0 0, 100% 0;
+}
+
+.hud {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100% - 24px);
+  padding: 8px 8px 8px 12px;
+  border: 1px solid var(--rig-line);
+  border-radius: 999px;
+  background: rgba(18, 28, 32, 0.94);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+  color: #8b9ba1;
+  font: 400 11px/1 "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  white-space: nowrap;
+  pointer-events: auto;
+}
+.hud b {
+  color: #e8ebe4;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.hud .dots { display: flex; }
+.hud .dots i {
+  width: 12px;
+  height: 12px;
+  margin-left: -5px;
+  border: 2px solid #121c20;
+  border-radius: 50%;
+}
+.hud .dots i:first-child { margin-left: 0; }
+.hud .bar {
+  width: 64px;
+  height: 3px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--rig-line);
+}
+.hud .bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--rig);
+  transition: width 0.2s;
+}
+.hud .st {
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: var(--rig);
+  color: #04202e;
+  font-weight: 500;
+}
+.hud button {
+  padding: 6px 9px;
+  border: 1px solid var(--rig-line);
+  border-radius: 999px;
+  background: #1b292f;
+  color: #e8ebe4;
+  font: inherit;
+  cursor: pointer;
+}
+.hud button:hover { border-color: var(--rig); }
+
+@media (max-width: 520px) {
+  .hud { gap: 8px; font-size: 10px; }
+  .hud .bar, .hud .dots { display: none; }
+}
