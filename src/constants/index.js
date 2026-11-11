@@ -189,7 +189,7 @@ const experiences = [
     iconBg: "#ffffff",
     date: "Sept 2025 – August 2026",
     points: [
-      "Completed a Master's in Computer Science with specialisation in Intelligent Systems at one of Europe's leading research universities, Dublin, Ireland.",
+      "Completed a Master's in Computer Science with specialisation in Intelligent Systems at one of Europe's leading research universities, Dublin, Ireland, graduating with First Class Honours (1:1).",
       "Coursework: Advanced Software Engineering, Distributed Systems, Information Retrieval, AI/ML, Knowledge and Data Engineering, Data Visualization, Text Analytics, Statistical Modelling, and Adaptive Applications.",
       "Active member of Trinity College's Boxing Club and Rifle Club.",
     ],

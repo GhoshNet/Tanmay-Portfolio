@@ -12,10 +12,10 @@ const About = () => {
       <div className="grid gap-x-16 gap-y-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
         <div className="max-w-[66ch] space-y-5 text-[17px] leading-[1.75] text-mute">
           <p data-l="text">
-            I'm a Computer Science postgraduate at <Strong>Trinity College Dublin</Strong>, specializing in <Strong>Intelligent Systems</Strong> with a focus on AI, Data Science, Knowledge Graphs, and Advanced Software Engineering.
+            I recently completed an MSc in Computer Science (<Strong>Intelligent Systems</Strong>) at <Strong>Trinity College Dublin</Strong> with First Class Honours, with a focus on AI, Data Science, Knowledge Graphs, and Advanced Software Engineering.
           </p>
           <p data-l="text">
-            With 2+ years of professional experience, I've built production-grade AI/ML solutions that deliver measurable impact—from computer vision systems reducing workplace hazards by 60% to RAG-based platforms cutting response times by 40%.
+            With 1.5+ years of production experience, I've built end-to-end AI/ML solutions that deliver measurable impact—from computer vision systems reducing workplace hazards by 60% to RAG-based platforms cutting response times by 40%.
           </p>
           <p data-l="text">
             My expertise spans <Strong>YOLO-based vision models, LLMs, FastAPI backends, and React frontends</Strong>. I specialize in transforming complex AI research into scalable, real-world applications that solve business problems and optimize operations.
