@@ -17,14 +17,31 @@
 const COLORS = ["#ffa62b", "#4cc2ff", "#ff6b6b", "#b79bff", "#5fe0b0", "#f5d76e", "#ff8fd0", "#9be36a", "#7aa2ff", "#ffd0a1"];
 
 // Tuning. Durations are in milliseconds at 1× speed.
+// The build has two paces. It opens slowly, so a visitor can see what the agents
+// are doing, then speeds up once the page is past the `slowUntil` section.
 const T = {
-  agentsDesktop: 10,
-  agentsMobile: 7,
-  move: [90, 220], // cursor travel to a layer: min, max
-  drag: [120, 270], // drawing the selection box: min, max
-  hold: 80, // pause on the finished box before moving on
-  camera: 0.14, // how hard the camera chases the build (0–1 per frame)
-  watchdog: 45000, // never leave the page half-built
+  slowUntil: "#about", // last section built at the slow pace
+  slow: {
+    agents: [6, 4], // desktop, mobile
+    move: [160, 420], // cursor travel to a layer: min, max
+    moveK: 0.5, // ms per pixel travelled
+    drag: [200, 560], // drawing the selection box: min, max
+    dragBase: 160,
+    dragK: 0.3, // ms per pixel of box diagonal
+    hold: 200, // pause on the finished box before moving on
+    camera: 0.06, // how hard the camera chases the build (0–1 per frame)
+  },
+  fast: {
+    agents: [10, 7],
+    move: [90, 220],
+    moveK: 0.4,
+    drag: [120, 270],
+    dragBase: 110,
+    dragK: 0.22,
+    hold: 80,
+    camera: 0.14,
+  },
+  watchdog: 60000, // never leave the page half-built
 };
 
 const SESSION_KEY = "tg-build-seen";
@@ -94,7 +111,9 @@ export function startBuild() {
 
   const s = (current = { speed: 1, dead: false, done: 0, camY: 0, next: 0 });
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms / s.speed));
-  const nAgents = window.innerWidth < 700 ? T.agentsMobile : T.agentsDesktop;
+  const small = window.innerWidth < 700 ? 1 : 0;
+  const nSlow = T.slow.agents[small]; // agents working during the slow opening
+  const nAgents = Math.max(nSlow, T.fast.agents[small]); // the rest join afterwards
 
   // One overlay scrolls with the page (boxes, guides, cursors)…
   s.doc = document.createElement("div");
@@ -106,8 +125,10 @@ export function startBuild() {
   s.fix.innerHTML =
     '<div class="ruler t"></div><div class="ruler l"></div>' +
     '<div class="hud" role="status"><span class="dots">' +
-    COLORS.slice(0, nAgents).map((c) => `<i style="background:${c}"></i>`).join("") +
-    `</span><span><b>${nAgents}</b> agents</span><span><b class="n">0</b> / ${els.length} layers</span>` +
+    COLORS.slice(0, nAgents)
+      .map((c, k) => `<i style="background:${c}${k < nSlow ? "" : ";display:none"}"></i>`)
+      .join("") +
+    `</span><span><b class="ag">${nSlow}</b> agents</span><span><b class="n">0</b> / ${els.length} layers</span>` +
     '<span class="bar"><span></span></span><span class="st">Building</span>' +
     '<button type="button" class="spd" aria-label="Toggle build speed">1×</button>' +
     '<button type="button" class="skip">Skip</button></div>';
@@ -116,6 +137,8 @@ export function startBuild() {
   const hudN = s.fix.querySelector(".n");
   const hudBar = s.fix.querySelector(".bar span");
   const hudSt = s.fix.querySelector(".st");
+  const hudAgents = s.fix.querySelector(".ag");
+  const hudDots = s.fix.querySelectorAll(".dots i");
   s.fix.querySelector(".skip").onclick = () => teardown(s);
   s.fix.querySelector(".spd").onclick = (e) => {
     s.speed = s.speed === 1 ? 2.5 : 1;
@@ -151,6 +174,13 @@ export function startBuild() {
   });
   tasks.sort((a, b) => a.top - b.top || a.i - b.i);
 
+  // Everything down to the end of the `slowUntil` section is built at the slow pace.
+  const slowEl = document.querySelector(T.slowUntil);
+  const slowEnd = slowEl ? slowEl.getBoundingClientRect().bottom + window.scrollY : 0;
+  let slowCount = 0;
+  while (slowCount < tasks.length && tasks[slowCount].top < slowEnd) slowCount++;
+  const pace = (index) => (index < slowCount ? T.slow : T.fast);
+
   // Camera: follow the build down the page.
   let front = 0;
   let frame = 0;
@@ -165,7 +195,7 @@ export function startBuild() {
       const vh = window.innerHeight;
       const ahead = tasks[Math.min(s.next, tasks.length - 1)].el;
       const target = clamp(Math.min(docTop(tasks[front].el) - vh * 0.1, docTop(ahead) - vh * 0.45), 0, max);
-      s.camY += (target - s.camY) * Math.min(1, T.camera * s.speed);
+      s.camY += (target - s.camY) * Math.min(1, pace(front).camera * s.speed);
       window.scrollTo(0, s.camY);
     }
     requestAnimationFrame(cam);
@@ -175,11 +205,18 @@ export function startBuild() {
     `<svg viewBox="0 0 18 18"><path d="M2 1.5 15.5 8 9.6 10 7.4 16z" fill="${c}" stroke="#fff" stroke-width="1.2" stroke-linejoin="round"/></svg>`;
 
   async function agent(k) {
+    // Extra agents sit out the slow opening and join when the pace picks up.
+    if (k >= nSlow) {
+      while (!s.dead && s.next < slowCount) await new Promise((r) => setTimeout(r, 60));
+      if (s.dead || s.next >= tasks.length) return;
+      hudDots[k].style.display = "";
+      hudAgents.textContent = Math.max(Number(hudAgents.textContent), k + 1);
+    }
     const cur = document.createElement("div");
     cur.className = "cur";
     cur.innerHTML = cursorSVG(COLORS[k % COLORS.length]);
     let x = k % 2 ? window.innerWidth + 30 : -30;
-    let y = window.innerHeight * (0.1 + 0.08 * k);
+    let y = window.scrollY + window.innerHeight * (0.1 + 0.08 * k);
     cur.style.transform = `translate(${x}px,${y}px)`;
     s.doc.append(cur);
 
@@ -190,9 +227,10 @@ export function startBuild() {
       y = ny;
       await sleep(ms);
     };
-    await sleep(40 * k);
+    await sleep(k < nSlow ? 60 * k : 30 * (k - nSlow));
 
     while (!s.dead && s.next < tasks.length) {
+      const P = pace(s.next);
       const t = tasks[s.next++];
       if (t.parent) await t.parent.done;
       // Don't build far below the fold: give the camera a moment to arrive.
@@ -213,7 +251,7 @@ export function startBuild() {
       }
       const isText = t.el.dataset.l === "text";
 
-      await move(r.x, r.y, clamp(Math.hypot(r.x - x, r.y - y) * 0.4, ...T.move));
+      await move(r.x, r.y, clamp(Math.hypot(r.x - x, r.y - y) * P.moveK, ...P.move));
       if (s.dead) return;
 
       const sel = document.createElement("div");
@@ -231,7 +269,7 @@ export function startBuild() {
       gv.style.height = r.h + 480 + "px";
       s.doc.append(gh, gv, sel);
 
-      const drag = clamp(110 + Math.hypot(r.w, r.h) * 0.22, ...T.drag);
+      const drag = clamp(P.dragBase + Math.hypot(r.w, r.h) * P.dragK, ...P.drag);
       sel.style.transitionDuration = drag / s.speed + "ms";
       sel.getBoundingClientRect(); // commit the zero-size state before growing
       sel.style.width = r.w + "px";
@@ -258,7 +296,7 @@ export function startBuild() {
       hudBar.style.width = (100 * s.done) / tasks.length + "%";
       t.finish();
 
-      await sleep(T.hold);
+      await sleep(P.hold);
       sel.style.transitionDuration = "300ms";
       sel.style.opacity = 0;
       setTimeout(() => {

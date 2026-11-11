@@ -8,7 +8,7 @@ import { SectionHead } from "./ui";
 
 const GITHUB_PROFILE = "https://github.com/GhoshNet";
 
-const ProjectCard = ({ index, name, description, tags, image, source_code_link, isEnterprise }) => {
+const ProjectCard = ({ index, name, description, tags, image, imageAlt, source_code_link, isEnterprise }) => {
   // Enterprise work has no public repo, so its link goes to the GitHub profile.
   const hasRepo = source_code_link.replace(/\/$/, "") !== GITHUB_PROFILE;
 
@@ -20,7 +20,7 @@ const ProjectCard = ({ index, name, description, tags, image, source_code_link, 
       <div className="relative aspect-[16/10] overflow-hidden border-b border-line bg-ink">
         <img
           src={image}
-          alt={`${name} project screenshot`}
+          alt={imageAlt || `${name} project screenshot`}
           loading="lazy"
           className="h-full w-full object-cover object-left opacity-90 transition-[opacity,transform] duration-300 group-hover:scale-[1.03] group-hover:opacity-100"
         />

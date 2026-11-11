@@ -25,8 +25,12 @@ import ParentalAdvisory from './parental_advisory.png';
 import criminal from './criminal.png';
 import langchain from './langchain.png';
 import ActinAiHub from './actin_ai_hub.png';
+import RevenueManagerAgent from "./revenue_manager_agent.webp";
+import ExergamingPose from "./exergaming_pose.webp";
 
 export {
+  RevenueManagerAgent,
+  ExergamingPose,
   project2,
   mysql,
   aws,

@@ -43,8 +43,10 @@ itself, then return to the top.
 - **Reduced motion**: visitors with that system setting never see it.
 - **Add an element**: give it a `data-l` attribute (`data-l="text"` for text that
   should wipe in). Elements without it simply appear with their parent.
-- **Tune it**: agent count and timings are the `T` object at the top of
-  `src/agentBuild/engine.js`.
+- **Two paces**: it opens slowly (hero and Overview) so the effect is readable,
+  then speeds up for the rest of the page.
+- **Tune it**: agent counts, timings and where the slow part ends (`slowUntil`)
+  are the `T` object at the top of `src/agentBuild/engine.js`.
 - **Turn it off**: remove `<AgentBuild />` from `src/App.jsx` and the small inline
   script in `index.html`.
 

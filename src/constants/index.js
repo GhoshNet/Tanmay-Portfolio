@@ -1,5 +1,7 @@
 
 import {
+  RevenueManagerAgent,
+  ExergamingPose,
   project2,
   mysql,
   aws,
@@ -349,6 +351,63 @@ const publications = [
 // ];
 
 const projects = [
+  {
+    name: "Revenue Manager Agent",
+    description:
+      "LLM agent that acts as a revenue manager for a hotel general manager. It answers natural-language commercial questions from reservation data it scrapes, loads and models itself, behind a streaming chat UI that shows every tool and skill call. The model never writes SQL: five typed tools over semantic views do the arithmetic, backed by a Playwright ETL with checksum reconciliation and 58 pytest tests.",
+    tags: [
+      {
+        name: "Python",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "LangChain Deep Agents",
+        color: "white-text-gradient",
+      },
+      {
+        name: "FastAPI",
+        color: "green-text-gradient",
+      },
+      {
+        name: "PostgreSQL",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "Playwright",
+        color: "blue-text-gradient",
+      },
+    ],
+    image: RevenueManagerAgent,
+    source_code_link: "https://github.com/GhoshNet/Revenue-Manager-Agent",
+    isEnterprise: false,
+  },
+  {
+    name: "Pose-Based Exergaming System",
+    description:
+      "MSc dissertation at Trinity College Dublin: An Extensible Pose-Based Exergaming System. A single-camera prototype that gives real-time feedback on exercise form for each body part. New exercises are defined from a recorded demonstration rather than hand-written rules, and feedback degrades gracefully when parts of the body are not tracked reliably.",
+    tags: [
+      {
+        name: "Python",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Pose Estimation",
+        color: "white-text-gradient",
+      },
+      {
+        name: "Computer Vision",
+        color: "green-text-gradient",
+      },
+      {
+        name: "Real-Time",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: ExergamingPose,
+    imageAlt: "Illustration of a pose skeleton with per-body-part feedback",
+    source_code_link: "https://github.com/GhoshNet",
+    isEnterprise: false,
+  },
   {
     name: "SafeAct - AI Safety Monitoring",
     description:
