@@ -70,7 +70,7 @@ const Hero = () => {
               <dt className="order-2 max-w-[17ch] font-mono text-[11px] uppercase leading-[1.45] tracking-[0.08em] text-mute">
                 {stat.label}
               </dt>
-              <dd className="order-1 font-display text-[clamp(40px,5vw,60px)] font-black leading-[0.9] text-amber [font-variant-numeric:tabular-nums]">
+              <dd className="order-1 lg:w-[104px] font-display text-[clamp(40px,5vw,60px)] font-black leading-[0.9] text-amber [font-variant-numeric:tabular-nums]">
                 {stat.value}
               </dd>
             </div>
