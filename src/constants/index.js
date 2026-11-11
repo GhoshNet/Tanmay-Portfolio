@@ -1,5 +1,7 @@
 
 import {
+  JourneyBooking,
+  SpotifyGalaxy,
   RevenueManagerAgent,
   ExergamingPose,
   project2,
@@ -406,6 +408,72 @@ const projects = [
     image: ExergamingPose,
     imageAlt: "Illustration of a pose skeleton with per-body-part feedback",
     source_code_link: "https://github.com/GhoshNet",
+    isEnterprise: false,
+  },
+  {
+    name: "Distributed Journey Booking System",
+    description:
+      "Fault-tolerant microservices system for pre-booking road vehicle journeys with instant roadside enforcement checks, built for the Distributed Systems module at Trinity College Dublin. Six services in Python and Go talk over REST and RabbitMQ, using the Saga pattern with a transactional outbox, circuit breakers and idempotency keys. PostgreSQL streaming replication and Redis Sentinel failover keep it available, and SERIALIZABLE transactions prevent double-booking under concurrent load.",
+    tags: [
+      {
+        name: "Python",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Go",
+        color: "white-text-gradient",
+      },
+      {
+        name: "RabbitMQ",
+        color: "green-text-gradient",
+      },
+      {
+        name: "PostgreSQL",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "Redis",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Docker",
+        color: "white-text-gradient",
+      },
+    ],
+    image: JourneyBooking,
+    imageAlt: "Architecture diagram: gateway, six services, RabbitMQ, PostgreSQL and Redis",
+    source_code_link: "https://github.com/GhoshNet/Distributed-Traffic-Service",
+    isEnterprise: false,
+  },
+  {
+    name: "Spotify Galaxy",
+    description:
+      "An immersive, interactive 3D visualization of 19,769 Spotify tracks spanning from 1921 to 2020. It uses machine learning (PCA and K-Means) and WebGL to map the high-dimensional audio features of music into a navigable galaxy, revealing the evolution of musical styles over a century.",
+    tags: [
+      {
+        name: "React",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "Three.js",
+        color: "white-text-gradient",
+      },
+      {
+        name: "Scikit-learn",
+        color: "green-text-gradient",
+      },
+      {
+        name: "PCA",
+        color: "pink-text-gradient",
+      },
+      {
+        name: "K-Means",
+        color: "blue-text-gradient",
+      },
+    ],
+    image: SpotifyGalaxy,
+    source_code_link: "https://github.com/GhoshNet/spotify-galaxy",
+    live_link: "https://ghoshnet.github.io/spotify-galaxy/",
     isEnterprise: false,
   },
   {

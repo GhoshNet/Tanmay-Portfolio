@@ -28,8 +28,12 @@ import ActinAiHub from './actin_ai_hub.png';
 import RevenueManagerAgent from "./revenue_manager_agent.webp";
 import ExergamingPose from "./exergaming_pose.webp";
 import portrait from "./portrait.webp";
+import JourneyBooking from "./journey_booking_architecture.webp";
+import SpotifyGalaxy from "./spotify_galaxy.webp";
 
 export {
+  JourneyBooking,
+  SpotifyGalaxy,
   portrait,
   RevenueManagerAgent,
   ExergamingPose,

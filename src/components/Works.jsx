@@ -8,7 +8,17 @@ import { SectionHead } from "./ui";
 
 const GITHUB_PROFILE = "https://github.com/GhoshNet";
 
-const ProjectCard = ({ index, name, description, tags, image, imageAlt, source_code_link, isEnterprise }) => {
+const ProjectCard = ({
+  index,
+  name,
+  description,
+  tags,
+  image,
+  imageAlt,
+  source_code_link,
+  live_link,
+  isEnterprise,
+}) => {
   // Enterprise work has no public repo, so its link goes to the GitHub profile.
   const hasRepo = source_code_link.replace(/\/$/, "") !== GITHUB_PROFILE;
 
@@ -37,11 +47,22 @@ const ProjectCard = ({ index, name, description, tags, image, imageAlt, source_c
 
       <div className="flex flex-1 flex-col gap-3.5 p-5">
         <div className={`flex justify-between ${styles.label}`}>
-          <span className="text-amber">{String(index + 1).padStart(2, "0")}</span>
-          <span>{isEnterprise ? "Enterprise / Private" : "Personal / Academic"}</span>
+          <span className="text-amber">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <span>
+            {isEnterprise ? "Enterprise / Private" : "Personal / Academic"}
+          </span>
         </div>
-        <h3 data-l="text" className={`${styles.h3} w-fit text-[28px] [text-wrap:balance]`}>{name}</h3>
-        <p className="flex-1 text-[14.5px] leading-[1.65] text-mute">{description}</p>
+        <h3
+          data-l="text"
+          className={`${styles.h3} w-fit text-[28px] [text-wrap:balance]`}
+        >
+          {name}
+        </h3>
+        <p className="flex-1 text-[14.5px] leading-[1.65] text-mute">
+          {description}
+        </p>
         <ul className="flex flex-wrap gap-1.5">
           {tags.map((tag) => (
             <li key={`${name}-${tag.name}`} className={styles.chip}>
@@ -49,16 +70,34 @@ const ProjectCard = ({ index, name, description, tags, image, imageAlt, source_c
             </li>
           ))}
         </ul>
-        <a
-          href={source_code_link}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={() => trackProjectClick(name)}
-          aria-label={hasRepo ? `View ${name} source code on GitHub` : `${name}: view GitHub profile`}
-          className={styles.link}
-        >
-          {hasRepo ? "Source code" : "GitHub profile"} <span aria-hidden="true">↗</span>
-        </a>
+        <div className="flex flex-wrap gap-x-5 gap-y-2">
+          <a
+            href={source_code_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackProjectClick(name)}
+            aria-label={
+              hasRepo
+                ? `View ${name} source code on GitHub`
+                : `${name}: view GitHub profile`
+            }
+            className={styles.link}
+          >
+            {hasRepo ? "Source code" : "GitHub profile"}{" "}
+            <span aria-hidden="true">↗</span>
+          </a>
+          {live_link && (
+            <a
+              href={live_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => trackProjectClick(`${name} (live demo)`)}
+              className={styles.link}
+            >
+              Live demo <span aria-hidden="true">↗</span>
+            </a>
+          )}
+        </div>
       </div>
     </article>
   );
@@ -69,7 +108,10 @@ const Works = () => {
     <>
       <SectionHead n="04" label="My work" title="Projects">
         <p data-l="text" className={`${styles.lede} mt-6`}>
-          The following projects showcase real-world AI/ML systems I've built — from computer vision pipelines to LLM-powered platforms. Enterprise projects are marked accordingly, while personal and academic projects include direct links to source code.
+          The following projects showcase real-world AI/ML systems I've built —
+          from computer vision pipelines to LLM-powered platforms. Enterprise
+          projects are marked accordingly, while personal and academic projects
+          include direct links to source code.
         </p>
       </SectionHead>
 
