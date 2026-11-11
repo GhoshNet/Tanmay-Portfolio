@@ -27,8 +27,10 @@ import langchain from './langchain.png';
 import ActinAiHub from './actin_ai_hub.png';
 import RevenueManagerAgent from "./revenue_manager_agent.webp";
 import ExergamingPose from "./exergaming_pose.webp";
+import portrait from "./portrait.webp";
 
 export {
+  portrait,
   RevenueManagerAgent,
   ExergamingPose,
   project2,

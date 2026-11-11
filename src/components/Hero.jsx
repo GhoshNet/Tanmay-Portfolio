@@ -1,4 +1,5 @@
 import { styles } from "../styles";
+import { portrait } from "../assets";
 import { heroStats, RESUME_URL } from "../constants";
 import { trackResumeDownload } from "../utils/analytics";
 
@@ -13,6 +14,14 @@ const Hero = () => {
       >
         AI/ML
       </div>
+
+      {/* Portrait: stands on the section's bottom edge, between the headline and the stats */}
+      <img
+        data-l
+        src={portrait}
+        alt="Tanmay Ghosh"
+        className="pointer-events-none absolute bottom-0 left-1/2 hidden h-[min(86%,540px)] w-auto max-w-none -translate-x-[70px] select-none [mask-image:linear-gradient(to_bottom,#000_80%,transparent)] xl:block"
+      />
 
       <div className={`${styles.wrap} relative grid items-end gap-10 lg:grid-cols-[minmax(0,1fr)_auto]`}>
         <div>
@@ -45,6 +54,14 @@ const Hero = () => {
               View Projects
             </a>
           </div>
+
+          {/* On small screens the portrait sits in the flow, under the buttons */}
+          <img
+            data-l
+            src={portrait}
+            alt="Tanmay Ghosh"
+            className="mx-auto mt-10 block max-h-[400px] w-auto select-none [mask-image:linear-gradient(to_bottom,#000_78%,transparent)] xl:hidden"
+          />
         </div>
 
         <dl className="grid grid-cols-2 gap-x-7 gap-y-6 pb-1.5 xs:grid-cols-3 lg:grid-cols-1">

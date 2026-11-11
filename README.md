@@ -24,6 +24,7 @@ Visit the live portfolio: [ghoshnet.github.io/Tanmay-Portfolio](https://ghoshnet
 - **React** (v18.2.0) - UI library
 - **Vite** (v4.1.0) - Build tool and dev server
 - **TailwindCSS** (v3.2.6) - Utility-first CSS framework
+- **Fontsource** - self-hosted fonts (Big Shoulders Display, IBM Plex Sans, IBM Plex Mono)
 
 ### Animation
 - **Agent-build reveal** - custom, dependency-free (`src/agentBuild/`)
